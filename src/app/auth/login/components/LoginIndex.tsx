@@ -1,7 +1,14 @@
+"use client";
+import { useState } from "react";
 import styles from "../login.module.scss";
 import Image from "next/image";
 
 export default function LoginIndex() {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePassword = () => {
+    setShowPassword((prev) => !prev);
+  };
   return (
     <div className={styles.container}>
       <div className={styles.body}>
@@ -29,16 +36,23 @@ export default function LoginIndex() {
 
                 <div className={styles.passwordWrapperStyles}>
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     placeholder="Password"
-                    
                   />
 
-                  <p className={styles.showHideText}>
-                    SHOW
-                  </p>
+                  <div onClick={togglePassword}>
+                    <p className={styles.showHideText}>
+                      {showPassword ? "HIDE" : "SHOW"}
+                    </p>
+                  </div>
                 </div>
               </div>
+
+              <div>
+                <p className={styles.forgotPasswordText}>FORGOT PASSWORD?</p>
+              </div>
+
+              <button className={styles.loginButton}>LOG IN</button>
             </div>
           </div>
         </div>
