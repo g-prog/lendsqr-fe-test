@@ -14,7 +14,28 @@ export default function LoginIndex() {
             <Image src="/login-image.svg" fill alt="login-img" />
           </div>
         </div>
-        <div className={styles.right}>right</div>
+        <div className={styles.right}>
+          <div className={styles.centerDiv}>
+            <div className={styles.rightContainer}>
+              <h4>Welcome!</h4>
+              <p>Enter details to login.</p>
+
+              <div className={styles.inputContainer}>
+                <input
+                  type="text"
+                  placeholder="Email"
+                  className={styles.inputStyles}
+                />
+
+                 <input
+                  type="password"
+                  placeholder="Email"
+                  className={styles.inputStyles}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
