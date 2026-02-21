@@ -20,9 +20,13 @@
   padding: 6rem;
   background: $fainted-grey;
 
+  @media (max-width: 799px) {
+    padding: 1rem 3rem;
+  }
+
   @media (max-width: 700px) {
     width: 100%;
-    padding: 3rem;
+    padding: 1rem 3rem;
   }
 }
 
@@ -31,6 +35,10 @@
   box-shadow: 0px 15px 90px 0px #00000008;
   background: $pure-white;
   padding: 0rem 6rem;
+
+  @media (max-width: 999px) {
+    padding: 0rem 3rem;
+  }
 
   @media (max-width: 700px) {
     width: 100%;
@@ -65,8 +73,8 @@
   margin-top: 6rem;
 
   @media (max-width: 700px) {
-    height: 500.75px;
-    margin-top: 2rem;
+    height: 360.75px;
+    margin-top: 3rem;
   }
 }
 
@@ -115,6 +123,7 @@
   border-radius: 5px;
   padding: 1rem 1.2rem;
   transition: all 0.3s ease;
+  font-family: $main-font;
 
   &:hover {
     border-color: #39cdcc;
