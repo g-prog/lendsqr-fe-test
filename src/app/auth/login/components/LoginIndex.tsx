@@ -11,7 +11,7 @@ export default function LoginIndex() {
   };
   return (
     <div className={styles.container}>
-      <div className={styles.body}>
+      <div className={styles.bodyWrapper}>
         <div className={styles.left}>
           <div className={styles.imgContainer}>
             <Image src="/logo.svg" fill alt="logo-img" />
