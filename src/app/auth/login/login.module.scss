@@ -56,16 +56,16 @@
     color: $thick-blue;
     margin: 0;
   }
+}
 
-  p {
-    font-family: "Avenir Next";
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color: $text-color;
-    margin: 1.5rem 0 0 0;
-  }
+.introText {
+  font-family: "Avenir Next";
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: $text-color;
+  margin: 1.5rem 0 0 0;
 }
 
 .inputContainer {
@@ -78,8 +78,55 @@
 
 .inputStyles {
   width: 100%;
-  border: 2px solid #545F7D26;
+  border: 2px solid #545f7d26;
   outline: none;
   border-radius: 5px;
-  padding: 1rem 1.5rem;
+  padding: 1rem 1.2rem;
+
+  &::placeholder {
+    color: $text-color;
+    font-family: "Avenir Next";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    opacity: 0.5;
+  }
+}
+
+.passwordWrapperStyles {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border: 2px solid $border-color;
+  border-radius: 5px;
+  padding: 1rem 1.2rem;
+
+  input {
+    outline: none;
+    border: none;
+    width: 80%;
+    background: transparent;
+    &::placeholder {
+      color: $text-color;
+      font-family: "Avenir Next";
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 100%;
+      letter-spacing: 0%;
+      opacity: 0.5;
+    }
+  }
+}
+
+.showHideText {
+  font-family: "Avenir Next";
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 10%;
+  text-align: center;
+  color: $torquoise-blue;
+  margin: 5px 0 0 0;
+  cursor: pointer;
 }

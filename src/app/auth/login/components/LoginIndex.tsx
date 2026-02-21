@@ -18,7 +18,7 @@ export default function LoginIndex() {
           <div className={styles.centerDiv}>
             <div className={styles.rightContainer}>
               <h4>Welcome!</h4>
-              <p>Enter details to login.</p>
+              <p className={styles.introText}>Enter details to login.</p>
 
               <div className={styles.inputContainer}>
                 <input
@@ -27,11 +27,17 @@ export default function LoginIndex() {
                   className={styles.inputStyles}
                 />
 
-                 <input
-                  type="password"
-                  placeholder="Email"
-                  className={styles.inputStyles}
-                />
+                <div className={styles.passwordWrapperStyles}>
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    
+                  />
+
+                  <p className={styles.showHideText}>
+                    SHOW
+                  </p>
+                </div>
               </div>
             </div>
           </div>
