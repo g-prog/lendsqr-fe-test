@@ -1,11 +1,6 @@
-import styles from './login.module.scss'
+import styles from "./login.module.scss";
+import LoginIndex from "./components/LoginIndex";
 
 export default function LoginPage() {
-  return (
-    <div className={styles.container} >
-      <div >
-        Login Form
-      </div>
-    </div>
-  )
+  return <LoginIndex />;
 }
