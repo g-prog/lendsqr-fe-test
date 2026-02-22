@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import layoutStyles from "./layout.module.scss";
 import Image from "next/image";
@@ -9,6 +10,8 @@ import BriefCaseIcon from "../../../components/icons/BriefCaseIcon";
 import ChevronDownIcon from "../../../components/icons/ChevronDownIcon";
 import HomeIcon from "../../../components/icons/HomeIcon";
 import UserIcon from "../../../components/icons/UserIcon";
+import HamburgerIcon from "../../../components/icons/HamburgerIcon";
+import CloseIcon from "../../../components/icons/CloseIcon";
 
 export default function DashboardLayout({
   children,
@@ -17,6 +20,10 @@ export default function DashboardLayout({
 }) {
   const pathname = usePathname() || "";
   const router = useRouter();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
   const dashboardItemsCustomers = [
     {
       id: 0,
@@ -132,7 +139,7 @@ export default function DashboardLayout({
       link: "/dashboard/user6",
     },
 
-     {
+    {
       id: 9,
       icon: <HomeIcon />,
       text: "Reports",
@@ -169,7 +176,74 @@ export default function DashboardLayout({
             </div>
           </div>
         </div>
+        <div
+          className={layoutStyles.hamburgerContainer}
+          onClick={toggleMobileMenu}
+        >
+          <HamburgerIcon />
+        </div>
       </div>
+
+      {isMobileMenuOpen && (
+        <div className={layoutStyles.mobileWrapper}>
+          <div className={layoutStyles.mobileClose} onClick={closeMobileMenu}>
+            <CloseIcon />
+          </div>
+
+          <div className={layoutStyles.leftBody}>
+            <div className={layoutStyles.switchOrgContainer}>
+              <BriefCaseIcon />
+              <p>Switch Organization</p>
+              <div className={layoutStyles.svgWrapper}>
+                <ChevronDownIcon />
+              </div>
+            </div>
+
+            <div className={layoutStyles.dashboardContainer}>
+              <HomeIcon />
+              <p>Dashboard</p>
+            </div>
+
+            <div className={layoutStyles.linksSection}>
+              <p className={layoutStyles.sectionHeaderText}>CUSTOMERS</p>
+
+              {dashboardItemsCustomers.map((item) => {
+                const isActive = pathname === item.link;
+
+                return (
+                  <div
+                    key={item.id}
+                    className={`${layoutStyles.linkItems} ${isActive ? layoutStyles.activeLink : ""}`}
+                    onClick={() => router.push(item.link)}
+                  >
+                    <div>{item.icon}</div>
+                    <p>{item.text}</p>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className={layoutStyles.linksSection}>
+              <p className={layoutStyles.sectionHeaderText}>BUSINESS</p>
+
+              {dashboardItemsBusiness.map((item) => {
+                const isActive = pathname === item.link;
+
+                return (
+                  <div
+                    key={item.id}
+                    className={`${layoutStyles.linkItems} ${isActive ? layoutStyles.activeLink : ""}`}
+                    onClick={() => router.push(item.link)}
+                  >
+                    <div>{item.icon}</div>
+                    <p>{item.text}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
       <div className={layoutStyles.container}>
         <div className={layoutStyles.layoutLeft}>
           <div className={layoutStyles.leftBody}>
@@ -205,7 +279,7 @@ export default function DashboardLayout({
               })}
             </div>
 
-              <div className={layoutStyles.linksSection}>
+            <div className={layoutStyles.linksSection}>
               <p className={layoutStyles.sectionHeaderText}>BUSINESS</p>
 
               {dashboardItemsBusiness.map((item) => {
