@@ -10,11 +10,20 @@ import {
 import { User } from "./types";
 import { usersData } from "./data";
 import tableStyles from "../userstable.module.scss";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import DownwardEllipseeIcon from "../../../../../components/icons/DownWardEllipseeIcon";
 import ThreeEllipseesIcon from "../../../../../components/icons/ThreeEllipseesIcon";
+import Select from "react-select";
+import { customSelectStyles } from "./customStyles";
 
 const UsersTable = () => {
+  const [openHeader, setOpenHeader] = useState<string | null>(null);
+
+  const options = [
+    { value: "active", label: "Active" },
+    { value: "inactive", label: "Inactive" },
+    { value: "pending", label: "Pending" },
+  ];
   const columns = useMemo<ColumnDef<User>[]>(
     () => [
       { accessorKey: "organization", header: "ORGANIZATION" },
@@ -67,8 +76,29 @@ const UsersTable = () => {
                         header.column.columnDef.header,
                         header.getContext(),
                       )}
-                      <DownwardEllipseeIcon />
+
+                      <div
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setOpenHeader(
+                            openHeader === header.id ? null : header.id,
+                          );
+                        }}
+                      >
+                        <DownwardEllipseeIcon />
+                      </div>
                     </div>
+
+                    {openHeader === header.id && (
+                      <div className={tableStyles.filterDropdown}>
+                        <Select
+                          options={options}
+                          placeholder="Select"
+                          components={{ IndicatorSeparator: null }}
+                           styles={customSelectStyles}
+                        />
+                      </div>
+                    )}
                   </th>
                 ))}
               </tr>
