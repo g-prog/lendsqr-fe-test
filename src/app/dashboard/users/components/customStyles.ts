@@ -10,10 +10,6 @@ export const customSelectStyles: StylesConfig<OptionType> = {
     ...provided,
     backgroundColor: '#FFFFFF',
     borderColor: '1px solid #213F7D',
-    // boxShadow: state.isFocused ? '0 0 0 1px #007BFF' : 'none',
-    // '&:hover': {
-    //   borderColor: '#007BFF',
-    // },
     borderRadius: '8px',
     minHeight: '40px',
     color: '#545F7D',
