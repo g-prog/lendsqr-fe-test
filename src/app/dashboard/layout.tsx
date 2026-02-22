@@ -18,48 +18,56 @@ export default function DashboardLayout({
       id: 0,
       icon: <UserIcon />,
       text: "Users",
+      link: '/dashboard/users'
     },
 
     {
       id: 1,
       icon: <HomeIcon />,
       text: "Guarantors",
+       link: '/dashboard/guarantors'
     },
 
     {
       id: 3,
       icon: <HomeIcon />,
       text: "Loans",
+       link: '/dashboard/users'
     },
 
     {
       id: 4,
       icon: <HomeIcon />,
       text: "Decision Models",
+       link: '/dashboard/users'
     },
 
     {
       id: 5,
       icon: <HomeIcon />,
       text: "Savings",
+       link: '/dashboard/users'
     },
 
     {
       id: 6,
       icon: <HomeIcon />,
       text: "Loan Requests",
+       link: '/dashboard/users'
     },
 
     {
       id: 7,
       icon: <HomeIcon />,
       text: "Whitelist",
+       link: '/dashboard/users'
     },
 
     {
       id: 8,
       icon: <HomeIcon />,
       text: "Karma",
+       link: '/dashboard/users'
     },
   ];
   return (

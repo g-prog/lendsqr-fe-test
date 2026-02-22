@@ -2,12 +2,19 @@
 import { useState } from "react";
 import styles from "../login.module.scss";
 import Image from "next/image";
+import { useRouter } from 'next/navigation';
 
 export default function LoginIndex() {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePassword = () => {
     setShowPassword((prev) => !prev);
+  };
+
+   const router = useRouter();
+
+  const handleClick = () => {
+    router.push('/dashboard/users'); 
   };
   return (
     <div className={styles.container}>
@@ -52,7 +59,7 @@ export default function LoginIndex() {
                 <p className={styles.forgotPasswordText}>FORGOT PASSWORD?</p>
               </div>
 
-              <button className={styles.loginButton}>LOG IN</button>
+              <button className={styles.loginButton} onClick={handleClick}>LOG IN</button>
             </div>
           </div>
         </div>

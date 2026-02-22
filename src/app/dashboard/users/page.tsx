@@ -1,3 +1,3 @@
 export default function OverviewPage() {
-  return <div>Overview page</div>;
+  return <div>Users page</div>;
 }
