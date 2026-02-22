@@ -18,13 +18,26 @@ export default function DashboardLayout({
         <div className={layoutStyles.searchOverAll}>
           <div className={layoutStyles.searchBox}>
             <input type="text" placeholder="Search for anything" />
-            
           </div>
           <div className={layoutStyles.searchWrapper}>
             <SearchIcon />
           </div>
+        </div>
+        <div className={layoutStyles.navRight}>
+          <p className={layoutStyles.docsText}>Docs</p>
+          <div className={layoutStyles.bellDiv}>
+            <BellIcon />
+          </div>
 
-          
+          <div className={layoutStyles.userDiv}>
+            <div className={layoutStyles.userImg}>
+              <Image src="/user.svg" fill alt="logo" />
+            </div>
+            <p className={layoutStyles.userName}>Adedeji</p>
+            <div className={layoutStyles.arrowDiv}>
+              <DownArrow />
+            </div>
+          </div>
         </div>
       </div>
       <div className={layoutStyles.container}>

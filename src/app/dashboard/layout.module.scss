@@ -8,6 +8,7 @@
 
 .layoutLeft {
   flex: 2;
+  box-shadow: 3px 0px 20px 0px #0000000a;
 }
 
 .layoutRight {
@@ -18,7 +19,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 1.5rem 2rem;
+  padding: 1.2rem 2rem;
   box-shadow: 3px 0px 20px 0px #0000000a;
 }
 
@@ -30,6 +31,7 @@
   position: relative;
   width: 115.37px;
   height: 30px;
+  margin-top: 1rem;
 }
 
 .searchBox {
@@ -40,6 +42,7 @@
   opacity: 0.4;
   background: $pure-white;
   width: 60%;
+  height: 40px;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
   border-right-color: transparent;
@@ -49,7 +52,7 @@
     outline: none;
     background: transparent;
     padding: 0rem 0.8rem;
-    width: 70%;
+    width: 100%;
 
     &::placeholder {
       font-family: $main-font;
@@ -62,17 +65,15 @@
   }
 }
 
-
 .searchWrapper {
   background: $torquoise-blue;
-  width: 54px;
-  height: 41.5px;
+  width: 58px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
-
   cursor: pointer;
   transition: all 0.25s ease;
 
@@ -90,4 +91,55 @@
 .searchOverAll {
   display: flex;
   width: 40%;
+  margin-top: 0.5rem;
+}
+
+.navRight {
+  display: flex;
+  gap: 40px;
+}
+
+.docsText {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-decoration-thickness: 3%;
+  color: $primary-color;
+  margin: 1.5rem 0 0 0;
+  cursor: pointer;
+}
+
+.bellDiv {
+  margin-top: 1rem;
+}
+
+.arrowDiv {
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.userDiv {
+  display: flex;
+  gap: 8px;
+  margin-top: 0.3rem;
+}
+
+.userImg {
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+
+.userName {
+  font-family: $main-font;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: $primary-color;
+  margin: 1rem 0 0 0;
 }
