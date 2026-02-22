@@ -13,10 +13,10 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const dashboardItems = [
+  const dashboardItemsCustomers = [
     {
       id: 0,
-      icon: <HomeIcon />,
+      icon: <UserIcon />,
       text: "Users",
     },
 
@@ -24,6 +24,42 @@ export default function DashboardLayout({
       id: 1,
       icon: <HomeIcon />,
       text: "Guarantors",
+    },
+
+    {
+      id: 3,
+      icon: <HomeIcon />,
+      text: "Loans",
+    },
+
+    {
+      id: 4,
+      icon: <HomeIcon />,
+      text: "Decision Models",
+    },
+
+    {
+      id: 5,
+      icon: <HomeIcon />,
+      text: "Savings",
+    },
+
+    {
+      id: 6,
+      icon: <HomeIcon />,
+      text: "Loan Requests",
+    },
+
+    {
+      id: 7,
+      icon: <HomeIcon />,
+      text: "Whitelist",
+    },
+
+    {
+      id: 8,
+      icon: <HomeIcon />,
+      text: "Karma",
     },
   ];
   return (
@@ -70,10 +106,17 @@ export default function DashboardLayout({
 
             <div className={layoutStyles.dashboardContainer}>
               <BriefCaseIcon />
-              <p>Switch Organization</p>
-              <div className={layoutStyles.svgWrapper}>
-                <ChevronDownIcon />
-              </div>
+              <p>Dashboard</p>
+            </div>
+
+            <div className={layoutStyles.linksSection}>
+              <p className={layoutStyles.sectionHeaderText}>CUSTOMERS</p>
+              {dashboardItemsCustomers.map((item) => (
+                <div key={item.id} className={layoutStyles.linkItems}>
+                  <div>{item.icon}</div>
+                  <p>{item.text}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

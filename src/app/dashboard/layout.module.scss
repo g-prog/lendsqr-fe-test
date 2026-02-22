@@ -46,6 +46,42 @@
   background: $fainted-grey;
 }
 
+.sectionHeaderText {
+  font-family: $main-font;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: $text-color;
+  margin: 0;
+}
+
+.linksSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 3rem;
+}
+
+.linkItems {
+  display: flex;
+  gap: 20px;
+  cursor: pointer;
+
+  p {
+    font-family: $main-font;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0px;
+    color: $primary-color
+  }
+
+  svg{
+    margin-top: 1rem;
+  }
+}
+
 .navBar {
   width: 100%;
   display: flex;
