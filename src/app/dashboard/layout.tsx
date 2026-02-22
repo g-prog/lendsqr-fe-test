@@ -1,5 +1,9 @@
 import layoutStyles from "./layout.module.scss";
 import Image from "next/image";
+import SearchIcon from "../../../components/icons/SearchIcon";
+import BellIcon from "../../../components/icons/BellIcon";
+import DownArrow from "../../../components/icons/DownArrow";
+
 export default function DashboardLayout({
   children,
 }: {
@@ -10,6 +14,17 @@ export default function DashboardLayout({
       <div className={layoutStyles.navBar}>
         <div className={layoutStyles.logoContainer}>
           <Image src="/logo.svg" fill alt="logo" />
+        </div>
+        <div className={layoutStyles.searchOverAll}>
+          <div className={layoutStyles.searchBox}>
+            <input type="text" placeholder="Search for anything" />
+            
+          </div>
+          <div className={layoutStyles.searchWrapper}>
+            <SearchIcon />
+          </div>
+
+          
         </div>
       </div>
       <div className={layoutStyles.container}>
