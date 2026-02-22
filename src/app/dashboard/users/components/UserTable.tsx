@@ -80,11 +80,7 @@ const UsersTable = () => {
               <tr key={row.id}>
                 {row.getVisibleCells().map((cell) => (
                   <td key={cell.id}>
-                    {flexRender(
-                      cell.column.columnDef.cell ??
-                        cell.column.columnDef.accessorKey,
-                      cell.getContext(),
-                    )}
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
               </tr>
