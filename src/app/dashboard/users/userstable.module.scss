@@ -1,0 +1,102 @@
+@use "../../variables" as *;
+
+.tableWrapper {
+  //   background: #fff;
+  padding: 20px;
+  border-radius: 6px;
+  width: 100%;
+  overflow-x: auto;
+  background: $pure-white;
+  padding: 1rem;
+  margin-top: 3rem;
+  box-shadow: 3px 5px 20px 0px #0000000a;
+}
+
+.tableHeader {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.thContent {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    text-align: left;
+    font-size: 12px;
+    color: #545f7d;
+  }
+
+  th {
+    padding: 12px 10px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-transform: uppercase;
+    color: $text-color
+  }
+
+  td {
+    padding: 16px 10px;
+    font-size: 14px;
+    border-top: 1px solid #eee;
+  }
+
+  tbody tr:hover {
+    background: #f9fafb;
+  }
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.Inactive {
+  background: #e9ecef;
+  color: #545f7d;
+}
+
+.Pending {
+  background: #fef7e0;
+  color: #e9b200;
+}
+
+.Active {
+  background: #e6f7ef;
+  color: #39cd62;
+}
+
+.Blacklisted {
+  background: #fde6eb;
+  color: #e4033b;
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+}
