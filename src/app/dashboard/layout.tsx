@@ -59,7 +59,23 @@ export default function DashboardLayout({
       </div>
       <div className={layoutStyles.container}>
         <div className={layoutStyles.layoutLeft}>
-          <p>left</p>
+          <div className={layoutStyles.leftBody}>
+            <div className={layoutStyles.switchOrgContainer}>
+              <BriefCaseIcon />
+              <p>Switch Organization</p>
+              <div className={layoutStyles.svgWrapper}>
+                <ChevronDownIcon />
+              </div>
+            </div>
+
+            <div className={layoutStyles.dashboardContainer}>
+              <BriefCaseIcon />
+              <p>Switch Organization</p>
+              <div className={layoutStyles.svgWrapper}>
+                <ChevronDownIcon />
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className={layoutStyles.layoutRight}>{children}</div>
