@@ -1,3 +1,5 @@
+"use client";
+import { usePathname, useRouter } from "next/navigation";
 import layoutStyles from "./layout.module.scss";
 import Image from "next/image";
 import SearchIcon from "../../../components/icons/SearchIcon";
@@ -13,61 +15,63 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+    const pathname = usePathname() || '';
+    const router = useRouter()
   const dashboardItemsCustomers = [
     {
       id: 0,
       icon: <UserIcon />,
       text: "Users",
-      link: '/dashboard/users'
+      link: "/dashboard/users",
     },
 
     {
       id: 1,
       icon: <HomeIcon />,
       text: "Guarantors",
-       link: '/dashboard/guarantors'
+      link: "/dashboard/guarantors",
     },
 
     {
       id: 3,
       icon: <HomeIcon />,
       text: "Loans",
-       link: '/dashboard/users'
+      link: "/dashboard/user1",
     },
 
     {
       id: 4,
       icon: <HomeIcon />,
       text: "Decision Models",
-       link: '/dashboard/users'
+      link: "/dashboard/user2",
     },
 
     {
       id: 5,
       icon: <HomeIcon />,
       text: "Savings",
-       link: '/dashboard/users'
+      link: "/dashboard/user3",
     },
 
     {
       id: 6,
       icon: <HomeIcon />,
       text: "Loan Requests",
-       link: '/dashboard/users'
+      link: "/dashboard/user4",
     },
 
     {
       id: 7,
       icon: <HomeIcon />,
       text: "Whitelist",
-       link: '/dashboard/users'
+      link: "/dashboard/user5",
     },
 
     {
       id: 8,
       icon: <HomeIcon />,
       text: "Karma",
-       link: '/dashboard/users'
+      link: "/dashboard/user6",
     },
   ];
   return (
@@ -113,18 +117,33 @@ export default function DashboardLayout({
             </div>
 
             <div className={layoutStyles.dashboardContainer}>
-              <BriefCaseIcon />
+              <HomeIcon />
               <p>Dashboard</p>
             </div>
 
             <div className={layoutStyles.linksSection}>
               <p className={layoutStyles.sectionHeaderText}>CUSTOMERS</p>
-              {dashboardItemsCustomers.map((item) => (
+              {/* {dashboardItemsCustomers.map((item) => (
                 <div key={item.id} className={layoutStyles.linkItems}>
                   <div>{item.icon}</div>
                   <p>{item.text}</p>
                 </div>
-              ))}
+              ))} */}
+
+              {dashboardItemsCustomers.map((item) => {
+                const isActive = pathname === item.link; 
+
+                return (
+                  <div
+                    key={item.id}
+                    className={`${layoutStyles.linkItems} ${isActive ? layoutStyles.activeLink : ""}`}
+                    onClick={() => router.push(item.link)}
+                  >
+                    <div>{item.icon}</div>
+                    <p>{item.text}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
