@@ -12,6 +12,9 @@ import HomeIcon from "../../../components/icons/HomeIcon";
 import UserIcon from "../../../components/icons/UserIcon";
 import HamburgerIcon from "../../../components/icons/HamburgerIcon";
 import CloseIcon from "../../../components/icons/CloseIcon";
+import GuarantorsIcon from "../../../components/icons/GuarantorsIcon";
+import LoansIcon from "../../../components/icons/LoansIcon";
+import HandshakeIcon from "../../../components/icons/HandshakeIcon";
 
 export default function DashboardLayout({
   children,
@@ -34,21 +37,21 @@ export default function DashboardLayout({
 
     {
       id: 1,
-      icon: <HomeIcon />,
+      icon: <GuarantorsIcon />,
       text: "Guarantors",
       link: "/dashboard/guarantors",
     },
 
     {
       id: 3,
-      icon: <HomeIcon />,
+      icon: <LoansIcon />,
       text: "Loans",
       link: "/dashboard/user1",
     },
 
     {
       id: 4,
-      icon: <HomeIcon />,
+      icon: <HandshakeIcon />,
       text: "Decision Models",
       link: "/dashboard/user2",
     },
