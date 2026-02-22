@@ -44,12 +44,35 @@
 .layoutLeft {
   flex: 2;
   box-shadow: 3px 0px 20px 0px #0000000a;
+  height: 100vh;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
 }
 
 .layoutRight {
   flex: 8;
-  overflow-y: scroll;
+  overflow-y: auto;
   background: $fainted-grey;
+  height: 100vh;
 }
 
 .sectionHeaderText {
@@ -113,10 +136,14 @@
   overflow-y: hidden;
   position: relative;
   z-index: 300;
+  height: 80px;
+  flex-shrink: 0;
 }
 
 .wrapper {
   width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .logoContainer {

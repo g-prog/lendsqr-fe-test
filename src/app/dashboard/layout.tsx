@@ -15,8 +15,8 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-    const pathname = usePathname() || '';
-    const router = useRouter()
+  const pathname = usePathname() || "";
+  const router = useRouter();
   const dashboardItemsCustomers = [
     {
       id: 0,
@@ -74,6 +74,71 @@ export default function DashboardLayout({
       link: "/dashboard/user6",
     },
   ];
+
+  const dashboardItemsBusiness = [
+    {
+      id: 0,
+      icon: <UserIcon />,
+      text: "Organization",
+      link: "/dashboard/users12",
+    },
+
+    {
+      id: 1,
+      icon: <HomeIcon />,
+      text: "Loan Products",
+      link: "/dashboard/guarantors",
+    },
+
+    {
+      id: 3,
+      icon: <HomeIcon />,
+      text: "Savings Products",
+      link: "/dashboard/user1",
+    },
+
+    {
+      id: 4,
+      icon: <HomeIcon />,
+      text: "Fees and Charges",
+      link: "/dashboard/user2",
+    },
+
+    {
+      id: 5,
+      icon: <HomeIcon />,
+      text: "Transactions",
+      link: "/dashboard/user3",
+    },
+
+    {
+      id: 6,
+      icon: <HomeIcon />,
+      text: "Services",
+      link: "/dashboard/user4",
+    },
+
+    {
+      id: 7,
+      icon: <HomeIcon />,
+      text: "Service Account",
+      link: "/dashboard/user5",
+    },
+
+    {
+      id: 8,
+      icon: <HomeIcon />,
+      text: "Settlements",
+      link: "/dashboard/user6",
+    },
+
+     {
+      id: 9,
+      icon: <HomeIcon />,
+      text: "Reports",
+      link: "/dashboard/user6",
+    },
+  ];
   return (
     <div className={layoutStyles.wrapper}>
       <div className={layoutStyles.navBar}>
@@ -123,15 +188,28 @@ export default function DashboardLayout({
 
             <div className={layoutStyles.linksSection}>
               <p className={layoutStyles.sectionHeaderText}>CUSTOMERS</p>
-              {/* {dashboardItemsCustomers.map((item) => (
-                <div key={item.id} className={layoutStyles.linkItems}>
-                  <div>{item.icon}</div>
-                  <p>{item.text}</p>
-                </div>
-              ))} */}
 
               {dashboardItemsCustomers.map((item) => {
-                const isActive = pathname === item.link; 
+                const isActive = pathname === item.link;
+
+                return (
+                  <div
+                    key={item.id}
+                    className={`${layoutStyles.linkItems} ${isActive ? layoutStyles.activeLink : ""}`}
+                    onClick={() => router.push(item.link)}
+                  >
+                    <div>{item.icon}</div>
+                    <p>{item.text}</p>
+                  </div>
+                );
+              })}
+            </div>
+
+              <div className={layoutStyles.linksSection}>
+              <p className={layoutStyles.sectionHeaderText}>BUSINESS</p>
+
+              {dashboardItemsBusiness.map((item) => {
+                const isActive = pathname === item.link;
 
                 return (
                   <div
