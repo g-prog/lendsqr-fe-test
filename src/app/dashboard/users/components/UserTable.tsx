@@ -12,6 +12,7 @@ import { usersData } from "./data";
 import tableStyles from "../userstable.module.scss";
 import { useMemo } from "react";
 import DownwardEllipseeIcon from "../../../../../components/icons/DownWardEllipseeIcon";
+import ThreeEllipseesIcon from "../../../../../components/icons/ThreeEllipseesIcon";
 
 const UsersTable = () => {
   const columns = useMemo<ColumnDef<User>[]>(
@@ -27,9 +28,12 @@ const UsersTable = () => {
         cell: ({ getValue }) => {
           const status = getValue() as string;
           return (
-            <span className={`${tableStyles.status} ${tableStyles[status]}`}>
-              {status}
-            </span>
+            <div className={tableStyles.statusContainer}>
+              <span className={`${tableStyles.status} ${tableStyles[status]}`}>
+                {status}
+              </span>
+              <ThreeEllipseesIcon />
+            </div>
           );
         },
       },
@@ -53,23 +57,6 @@ const UsersTable = () => {
     <>
       <div className={tableStyles.tableWrapper}>
         <table className={tableStyles.table}>
-          {/* <thead>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id} >
-                {headerGroup.headers.map((header) => (
-                  <th key={header.id}>
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    )}
-                  </th>
-                ))}
-                
-              </tr>
-              
-            ))}
-          </thead> */}
-
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>

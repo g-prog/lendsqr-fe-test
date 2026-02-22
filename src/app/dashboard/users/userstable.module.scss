@@ -41,11 +41,11 @@
     line-height: 100%;
     letter-spacing: 0%;
     text-transform: uppercase;
-    color: $text-color
+    color: $text-color;
   }
 
   td {
-    padding: 16px 10px;
+    padding: 25px 10px;
     font-size: 14px;
     border-top: 1px solid #eee;
   }
@@ -60,6 +60,11 @@
   border-radius: 100px;
   font-size: 12px;
   font-weight: 500;
+}
+
+.statusContainer {
+  display: flex;
+  justify-content: space-between;
 }
 
 .Inactive {
