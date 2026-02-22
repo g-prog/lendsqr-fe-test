@@ -3,12 +3,29 @@ import Image from "next/image";
 import SearchIcon from "../../../components/icons/SearchIcon";
 import BellIcon from "../../../components/icons/BellIcon";
 import DownArrow from "../../../components/icons/DownArrow";
+import BriefCaseIcon from "../../../components/icons/BriefCaseIcon";
+import ChevronDownIcon from "../../../components/icons/ChevronDownIcon";
+import HomeIcon from "../../../components/icons/HomeIcon";
+import UserIcon from "../../../components/icons/UserIcon";
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const dashboardItems = [
+    {
+      id: 0,
+      icon: <HomeIcon />,
+      text: "Users",
+    },
+
+    {
+      id: 1,
+      icon: <HomeIcon />,
+      text: "Guarantors",
+    },
+  ];
   return (
     <div className={layoutStyles.wrapper}>
       <div className={layoutStyles.navBar}>
