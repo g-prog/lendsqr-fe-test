@@ -11,7 +11,7 @@
   min-height: 700px;
 }
 
-.calendarWrapper{
+.calendarWrapper {
   position: absolute;
   left: 5px;
   top: 30px;
@@ -30,7 +30,7 @@
   display: flex;
   justify-content: space-between;
 
-  p{
+  p {
     font-weight: 500;
     font-size: 14px;
     line-height: 100%;
@@ -38,13 +38,12 @@
     color: $text-color;
     margin: 0;
     opacity: 0.5;
-
   }
 
-  div{
+  div {
     cursor: pointer;
 
-    svg{
+    svg {
       opacity: 0.5;
     }
   }
@@ -89,9 +88,10 @@
   width: 100%;
 }
 
-.bottomBtn{
+.bottomBtn {
   display: flex;
   justify-content: space-between;
+  padding: 0.5rem 0rem;
 }
 
 .thContent {
@@ -101,7 +101,53 @@
 }
 
 .resetBtn {
-  border: 1px solid #545F7D;
+  border: 1px solid #545f7d;
+  border-radius: 8px;
+  background: $pure-white;
+  font-family: $main-font;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: $text-color;
+  outline: none;
+  padding: 0.8rem 2rem;
+  cursor: pointer;
+
+  transition: all 0.25s ease-in-out;
+
+  &:hover {
+    background: rgba(33, 63, 125, 0.05); 
+    border-color: #213f7d;
+    color: #213f7d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(33, 63, 125, 0.15);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(33, 63, 125, 0.12);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba(33, 63, 125, 0.25);
+  }
+}
+
+.filterBtn {
+  @extend .resetBtn;
+  background: $torquoise-blue;
+  color: $pure-white;
+  border: none;
+
+  &:hover {
+    background: #9ee3e3; 
+    border-color: #213f7d;
+    color: $pure-white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(33, 63, 125, 0.15);
+  }
 }
 
 .table {

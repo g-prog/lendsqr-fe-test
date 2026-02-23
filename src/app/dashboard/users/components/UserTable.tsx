@@ -21,10 +21,10 @@ import { formatDateToDDMMYY } from "../../../../utils/helper";
 
 const UsersTable = () => {
   const [openHeader, setOpenHeader] = useState<string | null>(null);
-  const [date, setDate] = useState<Date | null>(null);
+  const [date, setDate] = useState<Date>(new Date());
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const formattedDate = formatDateToDDMMYY(date)
+  const formattedDate = formatDateToDDMMYY(date);
 
   const toggleCalendar = () => {
     setIsOpen((prev) => !prev);
@@ -175,7 +175,12 @@ const UsersTable = () => {
                         </div>
 
                         <div className={tableStyles.bottomBtn}>
-
+                          <button className={tableStyles.resetBtn}>
+                            Reset
+                          </button>
+                          <button className={tableStyles.filterBtn}>
+                            Filter
+                          </button>
                         </div>
                       </div>
                     )}
