@@ -132,6 +132,10 @@
   display: flex;
   align-items: center;
   gap: 6px;
+
+  div {
+    cursor: pointer;
+  }
 }
 
 .resetBtn {
@@ -218,7 +222,7 @@
     padding: 1.5rem 1rem;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
   }
 
   td {
@@ -238,8 +242,10 @@
 .status {
   padding: 6px 12px;
   border-radius: 100px;
-  font-size: 12px;
   font-weight: 500;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0px;
 }
 
 .statusContainer {

@@ -33,7 +33,6 @@ interface StatusCellProps {
   router: ReturnType<typeof useRouter>;
 }
 
-
 interface StatusCellProps {
   getValue: () => unknown;
   row: Row<User>;
@@ -53,7 +52,6 @@ const StatusCell = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
 
-  
   const rowId = row.original.username;
   const isOpen = openRowId === rowId;
 
@@ -84,7 +82,6 @@ const StatusCell = ({
   const handleOptionClick = (e: React.MouseEvent, action: string) => {
     e.stopPropagation();
     e.preventDefault();
-    console.log(`${action} user:`, row.original.username);
 
     router.push(`/dashboard/users/${row.original.username}`);
     setOpenRowId(null);
@@ -135,14 +132,40 @@ const StatusCell = ({
   );
 };
 
-
-
 const UsersTable = () => {
   const [openHeader, setOpenHeader] = useState<string | null>(null);
   const [date, setDate] = useState<Date>(new Date());
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [openRowId, setOpenRowId] = useState<string | null>(null);
   const router = useRouter();
+  const [data, setData] = useState<User[]>([]);
+  const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 5,
+  });
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      setLoading(true);
+
+      const res = await fetch(
+        `https://mocki.io/v1/42840687-8977-40d6-9c96-b683266ee635`,
+      );
+
+      const result = await res.json();
+
+      setData(result.data);
+      setTotal(result.total);
+      setLoading(false);
+    };
+
+    fetchUsers();
+  }, [pagination.pageIndex, pagination.pageSize]);
+
+  console.log("mock-data", data);
 
   const formattedDate = formatDateToDDMMYY(date);
 
@@ -185,16 +208,18 @@ const UsersTable = () => {
   );
 
   const table = useReactTable({
-    data: usersData,
+    data,
     columns,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    initialState: {
-      pagination: {
-        pageSize: 5,
-      },
+    pageCount: Math.ceil(total / pagination.pageSize),
+    state: {
+      pagination,
     },
+    manualPagination: true,
+    onPaginationChange: setPagination,
+    getCoreRowModel: getCoreRowModel(),
   });
+
+  const totalPages = Math.ceil(total / pagination.pageSize);
 
   return (
     <>
@@ -322,7 +347,7 @@ const UsersTable = () => {
         </table>
       </div>
 
-      <div className={tableStyles.pagination}>
+      {/* <div className={tableStyles.pagination}>
         <button
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
@@ -341,6 +366,73 @@ const UsersTable = () => {
         >
           {">"}
         </button>
+      </div> */}
+
+      <div className={tableStyles.pagination}>
+        {/* Showing dropdown */}
+        <div>
+          Showing{" "}
+          <select
+            value={pagination.pageSize}
+            onChange={(e) =>
+              setPagination({
+                pageIndex: 0,
+                pageSize: Number(e.target.value),
+              })
+            }
+          >
+            {[5, 10, 25, 50, 100].map((size) => (
+              <option key={size} value={size}>
+                {size}
+              </option>
+            ))}
+          </select>{" "}
+          out of {total}
+        </div>
+
+        {/* Page controls */}
+        <div>
+          <button
+            onClick={() =>
+              setPagination((prev) => ({
+                ...prev,
+                pageIndex: Math.max(prev.pageIndex - 1, 0),
+              }))
+            }
+            disabled={pagination.pageIndex === 0}
+          >
+            {"<"}
+          </button>
+
+          {Array.from({ length: totalPages }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() =>
+                setPagination((prev) => ({
+                  ...prev,
+                  pageIndex: index,
+                }))
+              }
+              className={
+                pagination.pageIndex === index ? tableStyles.activePage : ""
+              }
+            >
+              {index + 1}
+            </button>
+          ))}
+
+          <button
+            onClick={() =>
+              setPagination((prev) => ({
+                ...prev,
+                pageIndex: Math.min(prev.pageIndex + 1, totalPages - 1),
+              }))
+            }
+            disabled={pagination.pageIndex === totalPages - 1}
+          >
+            {">"}
+          </button>
+        </div>
       </div>
     </>
   );
