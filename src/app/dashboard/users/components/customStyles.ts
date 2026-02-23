@@ -14,7 +14,6 @@ export const customSelectStyles: StylesConfig<OptionType> = {
     minHeight: '40px',
     color: '#545F7D',
     outline: 'none',
-
     boxShadow: 'none',
     opacity: '0.5'
   }),
