@@ -16,14 +16,26 @@ import ThreeEllipseesIcon from "../../../../../components/icons/ThreeEllipseesIc
 import Select from "react-select";
 import { customSelectStyles } from "./customStyles";
 import CalendarIcon from "../../../../../components/icons/CalendarIcon";
+import DatePicker from "../../../../../components/datepicker/DatePicker";
 
 const UsersTable = () => {
   const [openHeader, setOpenHeader] = useState<string | null>(null);
+  const [date, setDate] = useState<Date | null>(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const toggleCalendar = () => {
+    setIsOpen((prev) => !prev);
+  };
 
   const options = [
     { value: "active", label: "Active" },
     { value: "inactive", label: "Inactive" },
     { value: "pending", label: "Pending" },
+  ];
+
+  const organizationOptions = [
+    { value: "Dangote", label: "Dangote" },
+    { value: "Paystack", label: "Paystack" },
   ];
   const columns = useMemo<ColumnDef<User>[]>(
     () => [
@@ -95,7 +107,7 @@ const UsersTable = () => {
                         <div className={tableStyles.optionCol}>
                           <label>Organization</label>
                           <Select
-                            options={options}
+                            options={organizationOptions}
                             placeholder="Select"
                             components={{ IndicatorSeparator: null }}
                             styles={customSelectStyles}
@@ -124,9 +136,19 @@ const UsersTable = () => {
                           <label>Date</label>
                           <div className={tableStyles.calendarStyles}>
                             <p>Date</p>
-                            <div>
+                            <div onClick={toggleCalendar}>
                               <CalendarIcon />
                             </div>
+
+                            {isOpen && (
+                              <div className={tableStyles.calendarWrapper}>
+                                <DatePicker
+                                  value={date}
+                                  onChange={setDate}
+                                  placeholder="Choose date"
+                                />
+                              </div>
+                            )}
                           </div>
                         </div>
 
@@ -136,6 +158,16 @@ const UsersTable = () => {
                             type="text"
                             placeholder="Phone Number"
                             className={tableStyles.inputStyles}
+                          />
+                        </div>
+
+                        <div className={tableStyles.optionCol}>
+                          <label>Status</label>
+                          <Select
+                            options={options}
+                            placeholder="Status"
+                            components={{ IndicatorSeparator: null }}
+                            styles={customSelectStyles}
                           />
                         </div>
                       </div>
