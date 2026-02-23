@@ -6,11 +6,14 @@ import {
   getCoreRowModel,
   getPaginationRowModel,
   useReactTable,
+  CellContext,
+  Row,
 } from "@tanstack/react-table";
+import { useRouter } from "next/navigation";
 import { User } from "./types";
 import { usersData } from "./data";
 import tableStyles from "../userstable.module.scss";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import DownwardEllipseeIcon from "../../../../components/icons/DownWardEllipseeIcon";
 import ThreeEllipseesIcon from "../../../../components/icons/ThreeEllipseesIcon";
 import Select from "react-select";
@@ -18,11 +21,128 @@ import { customSelectStyles } from "./customStyles";
 import CalendarIcon from "../../../../components/icons/CalendarIcon";
 import DatePicker from "../../../../components/datepicker/DatePicker";
 import { formatDateToDDMMYY } from "../../../../utils/helper";
+import EyeIcon from "@/components/icons/EyeIcon";
+import BlacklistIcon from "@/components/icons/BlacklistIcon";
+import ActivateUserIcon from "@/components/icons/ActivateUserIcon";
+
+interface StatusCellProps {
+  getValue: () => unknown;
+  row: Row<User>;
+  openRowId: string | null;
+  setOpenRowId: (id: string | null) => void;
+  router: ReturnType<typeof useRouter>;
+}
+
+
+interface StatusCellProps {
+  getValue: () => unknown;
+  row: Row<User>;
+  openRowId: string | null;
+  setOpenRowId: (id: string | null) => void;
+  router: ReturnType<typeof useRouter>;
+}
+
+const StatusCell = ({
+  getValue,
+  row,
+  openRowId,
+  setOpenRowId,
+  router,
+}: StatusCellProps) => {
+  const status = getValue() as string;
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
+
+  
+  const rowId = row.original.username;
+  const isOpen = openRowId === rowId;
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isOpen &&
+        dropdownRef.current &&
+        buttonRef.current &&
+        !dropdownRef.current.contains(event.target as Node) &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
+        setOpenRowId(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isOpen, setOpenRowId]);
+
+  const handleDropdownToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    setOpenRowId(openRowId === rowId ? null : rowId);
+  };
+
+  const handleOptionClick = (e: React.MouseEvent, action: string) => {
+    e.stopPropagation();
+    e.preventDefault();
+    console.log(`${action} user:`, row.original.username);
+
+    router.push(`/dashboard/users/${row.original.username}`);
+    setOpenRowId(null);
+  };
+
+  return (
+    <div className={tableStyles.statusContainer}>
+      <span className={`${tableStyles.status} ${tableStyles[status] || ""}`}>
+        {status}
+      </span>
+
+      <div
+        ref={buttonRef}
+        onClick={handleDropdownToggle}
+        className={tableStyles.ellipsisButton}
+      >
+        <ThreeEllipseesIcon />
+      </div>
+
+      {isOpen && (
+        <div className={tableStyles.optionDropdown} ref={dropdownRef}>
+          <div
+            className={tableStyles.optionFlex}
+            onClick={(e) => handleOptionClick(e, "view")}
+          >
+            <EyeIcon />
+            <p>View Details</p>
+          </div>
+
+          <div
+            className={tableStyles.optionFlex}
+            onClick={(e) => handleOptionClick(e, "blacklist")}
+          >
+            <BlacklistIcon />
+            <p>Blacklist User</p>
+          </div>
+
+          <div
+            className={tableStyles.optionFlex}
+            onClick={(e) => handleOptionClick(e, "activate")}
+          >
+            <ActivateUserIcon />
+            <p>Activate User</p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+
 
 const UsersTable = () => {
   const [openHeader, setOpenHeader] = useState<string | null>(null);
   const [date, setDate] = useState<Date>(new Date());
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [openRowId, setOpenRowId] = useState<string | null>(null);
+  const router = useRouter();
 
   const formattedDate = formatDateToDDMMYY(date);
 
@@ -37,9 +157,10 @@ const UsersTable = () => {
   ];
 
   const organizationOptions = [
-    { value: "Dangote", label: "Dangote" },
+    { value: "levi", label: "Levi" },
     { value: "Paystack", label: "Paystack" },
   ];
+
   const columns = useMemo<ColumnDef<User>[]>(
     () => [
       { accessorKey: "organization", header: "ORGANIZATION" },
@@ -50,20 +171,17 @@ const UsersTable = () => {
       {
         accessorKey: "status",
         header: "STATUS",
-        cell: ({ getValue }) => {
-          const status = getValue() as string;
-          return (
-            <div className={tableStyles.statusContainer}>
-              <span className={`${tableStyles.status} ${tableStyles[status]}`}>
-                {status}
-              </span>
-              <ThreeEllipseesIcon />
-            </div>
-          );
-        },
+        cell: (props) => (
+          <StatusCell
+            {...props}
+            openRowId={openRowId}
+            setOpenRowId={setOpenRowId}
+            router={router}
+          />
+        ),
       },
     ],
-    [],
+    [openRowId, setOpenRowId, router],
   );
 
   const table = useReactTable({
