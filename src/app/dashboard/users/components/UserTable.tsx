@@ -15,6 +15,7 @@ import DownwardEllipseeIcon from "../../../../../components/icons/DownWardEllips
 import ThreeEllipseesIcon from "../../../../../components/icons/ThreeEllipseesIcon";
 import Select from "react-select";
 import { customSelectStyles } from "./customStyles";
+import CalendarIcon from "../../../../../components/icons/CalendarIcon";
 
 const UsersTable = () => {
   const [openHeader, setOpenHeader] = useState<string | null>(null);
@@ -91,12 +92,52 @@ const UsersTable = () => {
 
                     {openHeader === header.id && (
                       <div className={tableStyles.filterDropdown}>
-                        <Select
-                          options={options}
-                          placeholder="Select"
-                          components={{ IndicatorSeparator: null }}
-                           styles={customSelectStyles}
-                        />
+                        <div className={tableStyles.optionCol}>
+                          <label>Organization</label>
+                          <Select
+                            options={options}
+                            placeholder="Select"
+                            components={{ IndicatorSeparator: null }}
+                            styles={customSelectStyles}
+                          />
+                        </div>
+
+                        <div className={tableStyles.optionCol}>
+                          <label>Username</label>
+                          <input
+                            type="text"
+                            placeholder="User"
+                            className={tableStyles.inputStyles}
+                          />
+                        </div>
+
+                        <div className={tableStyles.optionCol}>
+                          <label>Email</label>
+                          <input
+                            type="text"
+                            placeholder="Email"
+                            className={tableStyles.inputStyles}
+                          />
+                        </div>
+
+                        <div className={tableStyles.optionCol}>
+                          <label>Date</label>
+                          <div className={tableStyles.calendarStyles}>
+                            <p>Date</p>
+                            <div>
+                              <CalendarIcon />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className={tableStyles.optionCol}>
+                          <label>Phone Number</label>
+                          <input
+                            type="text"
+                            placeholder="Phone Number"
+                            className={tableStyles.inputStyles}
+                          />
+                        </div>
                       </div>
                     )}
                   </th>

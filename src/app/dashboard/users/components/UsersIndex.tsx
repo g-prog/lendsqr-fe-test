@@ -67,7 +67,8 @@ const UsersIndex = () => {
       </div>
 
       <div className={userStyles.tableContainer}>
-        <UsersTable />
+        <UsersTable/>
+
       </div>
     </div>
   );

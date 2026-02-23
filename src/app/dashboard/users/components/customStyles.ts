@@ -15,19 +15,23 @@ export const customSelectStyles: StylesConfig<OptionType> = {
     color: '#545F7D',
     outline: 'none',
     boxShadow: 'none',
-    opacity: '0.5'
+    opacity: '0.5',
+    fontWeight: '400',
+    fontSize: '14px'
   }),
 
   option: (provided, state) => ({
     ...provided,
     backgroundColor: state.isSelected
-      ? '#007BFF'
+      ? '#39CDCC'
       : state.isFocused
       ? '#e6f0ff'
       : '#fff',
-    color: state.isSelected ? '#fff' : '#333',
+    color: state.isSelected ? '#fff' : '#545F7D',
     padding: 10,
-    cursor: 'pointer'
+    fontWeight: '400',
+    cursor: 'pointer',
+    fontFamily: 'Work Sans'
   }),
 
   menu: provided => ({

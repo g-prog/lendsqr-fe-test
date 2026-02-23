@@ -7,9 +7,66 @@
   width: 100%;
   overflow-x: auto;
   background: $pure-white;
-  padding: 1rem;
   margin-top: 3rem;
   box-shadow: 3px 5px 20px 0px #0000000a;
+  min-height: 700px;
+}
+
+.calendarStyles {
+  border: 1px solid $primary-color;
+  background: $pure-white;
+  border-radius: 8px;
+  padding: 0.7rem;
+  opacity: 0.5;
+  display: flex;
+  justify-content: space-between;
+
+  p{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: $text-color;
+    margin: 0;
+
+  }
+
+  div{
+    cursor: pointer;
+  }
+}
+
+.optionCol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  label {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: $text-color;
+  }
+}
+
+.inputStyles {
+  border: 1px solid $primary-color;
+  background: $pure-white;
+  outline: none;
+  border-radius: 8px;
+  padding: 0.7rem;
+  opacity: 0.5;
+  font-family: $main-font;
+
+  &::placeholder {
+    font-family: $main-font;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: $text-color;
+  }
 }
 
 .tableHeader {
@@ -49,13 +106,16 @@
     position: absolute;
     top: 45px;
     left: 0;
-    width: 220px;
+    width: 270px;
     background: $pure-white;
-   border: 1px solid $border-color-2;
+    border: 1px solid $border-color-2;
     border-radius: 6px;
-    padding: 12px;
-    box-shadow: 3px 5px 20px 0px #0000000A;
+    box-shadow: 3px 5px 20px 0px #0000000a;
     z-index: 100;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 
   td {
