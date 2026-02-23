@@ -11,17 +11,20 @@ import { User } from "./types";
 import { usersData } from "./data";
 import tableStyles from "../userstable.module.scss";
 import { useMemo, useState } from "react";
-import DownwardEllipseeIcon from "../../../../../components/icons/DownWardEllipseeIcon";
-import ThreeEllipseesIcon from "../../../../../components/icons/ThreeEllipseesIcon";
+import DownwardEllipseeIcon from "../../../../components/icons/DownWardEllipseeIcon";
+import ThreeEllipseesIcon from "../../../../components/icons/ThreeEllipseesIcon";
 import Select from "react-select";
 import { customSelectStyles } from "./customStyles";
-import CalendarIcon from "../../../../../components/icons/CalendarIcon";
-import DatePicker from "../../../../../components/datepicker/DatePicker";
+import CalendarIcon from "../../../../components/icons/CalendarIcon";
+import DatePicker from "../../../../components/datepicker/DatePicker";
+import { formatDateToDDMMYY } from "../../../../utils/helper";
 
 const UsersTable = () => {
   const [openHeader, setOpenHeader] = useState<string | null>(null);
   const [date, setDate] = useState<Date | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const formattedDate = formatDateToDDMMYY(date)
 
   const toggleCalendar = () => {
     setIsOpen((prev) => !prev);
@@ -135,7 +138,7 @@ const UsersTable = () => {
                         <div className={tableStyles.optionCol}>
                           <label>Date</label>
                           <div className={tableStyles.calendarStyles}>
-                            <p>Date</p>
+                            <p>{date ? formattedDate : "Date"}</p>
                             <div onClick={toggleCalendar}>
                               <CalendarIcon />
                             </div>
@@ -169,6 +172,10 @@ const UsersTable = () => {
                             components={{ IndicatorSeparator: null }}
                             styles={customSelectStyles}
                           />
+                        </div>
+
+                        <div className={tableStyles.bottomBtn}>
+
                         </div>
                       </div>
                     )}

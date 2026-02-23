@@ -3,18 +3,18 @@ import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import layoutStyles from "./layout.module.scss";
 import Image from "next/image";
-import SearchIcon from "../../../components/icons/SearchIcon";
-import BellIcon from "../../../components/icons/BellIcon";
-import DownArrow from "../../../components/icons/DownArrow";
-import BriefCaseIcon from "../../../components/icons/BriefCaseIcon";
-import ChevronDownIcon from "../../../components/icons/ChevronDownIcon";
-import HomeIcon from "../../../components/icons/HomeIcon";
-import UserIcon from "../../../components/icons/UserIcon";
-import HamburgerIcon from "../../../components/icons/HamburgerIcon";
-import CloseIcon from "../../../components/icons/CloseIcon";
-import GuarantorsIcon from "../../../components/icons/GuarantorsIcon";
-import LoansIcon from "../../../components/icons/LoansIcon";
-import HandshakeIcon from "../../../components/icons/HandshakeIcon";
+import SearchIcon from "../../components/icons/SearchIcon";
+import BellIcon from "../../components/icons/BellIcon";
+import DownArrow from "../../components/icons/DownArrow";
+import BriefCaseIcon from "../../components/icons/BriefCaseIcon";
+import ChevronDownIcon from "../../components/icons/ChevronDownIcon";
+import HomeIcon from "../../components/icons/HomeIcon";
+import UserIcon from "../../components/icons/UserIcon";
+import HamburgerIcon from "../../components/icons/HamburgerIcon";
+import CloseIcon from "../../components/icons/CloseIcon";
+import GuarantorsIcon from "../../components/icons/GuarantorsIcon";
+import LoansIcon from "../../components/icons/LoansIcon";
+import HandshakeIcon from "../../components/icons/HandshakeIcon";
 
 export default function DashboardLayout({
   children,

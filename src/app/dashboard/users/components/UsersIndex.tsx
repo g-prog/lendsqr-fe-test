@@ -1,8 +1,8 @@
 import userStyles from "../users.module.scss";
-import PurplePeopleIcon from "../../../../../components/icons/PurplePeopleIcon";
-import ThreePeopleIcon from "../../../../../components/icons/ThreePeopleIcon";
-import FileIcon from "../../../../../components/icons/FileIcon";
-import CoinIcon from "../../../../../components/icons/CoinIcon";
+import PurplePeopleIcon from "../../../../components/icons/PurplePeopleIcon";
+import ThreePeopleIcon from "../../../../components/icons/ThreePeopleIcon";
+import FileIcon from "../../../../components/icons/FileIcon";
+import CoinIcon from "../../../../components/icons/CoinIcon";
 import UsersTable from "./UserTable";
 
 type CardData = {
