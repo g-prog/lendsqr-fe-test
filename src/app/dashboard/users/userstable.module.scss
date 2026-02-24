@@ -286,7 +286,7 @@
     letter-spacing: 0%;
     color: $text-color;
     position: relative;
-     @media (max-width: 700px) {
+    @media (max-width: 1299px) {
       padding: 10px;
       white-space: nowrap;
     }
@@ -313,7 +313,12 @@
     font-size: 14px;
     border-top: 1px solid #eee;
 
-    @media (max-width: 700px) {
+    @media (max-width: 1299px) {
+      padding: 15px;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 1024px) {
       padding: 10px;
       white-space: nowrap;
     }
@@ -379,5 +384,16 @@
   justify-content: space-between;
   padding: 2rem 0rem;
 
-  
+  @media (max-width: 700px) {
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  span {
+    @media (max-width: 600px) {
+      white-space: nowrap;
+    }
+  }
 }
