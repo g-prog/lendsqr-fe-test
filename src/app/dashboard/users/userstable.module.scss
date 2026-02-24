@@ -340,6 +340,11 @@
   line-height: 100%;
   letter-spacing: 0px;
   text-align: center;
+   text-transform: capitalize;
+}
+
+.skeletonWrapper{
+  height: 600px;
 }
 
 .inactive {

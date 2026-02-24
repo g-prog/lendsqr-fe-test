@@ -26,6 +26,7 @@ import BlacklistIcon from "@/components/icons/BlacklistIcon";
 import ActivateUserIcon from "@/components/icons/ActivateUserIcon";
 import LeftIcon from "@/components/icons/LeftIcon";
 import RightIcon from "@/components/icons/RightIcon";
+import TableSkeleton from "@/components/datepicker/tableskeleton/TableSkeleton";
 
 interface StatusCellProps {
   getValue: () => unknown;
@@ -91,7 +92,9 @@ const StatusCell = ({
 
   return (
     <div className={tableStyles.statusContainer}>
-      <span className={`${tableStyles.status} ${tableStyles[status?.toLowerCase()] || ""}`}>
+      <span
+        className={`${tableStyles.status} ${tableStyles[status?.toLowerCase()] || ""}`}
+      >
         {status}
       </span>
 
@@ -154,7 +157,7 @@ const UsersTable = () => {
   //     setLoading(true);
 
   //     const res = await fetch(
-  //       `https://mocki.io/v1/42840687-8977-40d6-9c96-b683266ee635`,
+  //       "https://mocki.io/v1/42840687-8977-40d6-9c96-b683266ee635",
   //     );
 
   //     const result = await res.json();
@@ -165,26 +168,28 @@ const UsersTable = () => {
   //   };
 
   //   fetchUsers();
-  // }, [pagination.pageIndex, pagination.pageSize]);
+  // }, []);
+
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      setLoading(true);
+  const fetchUsers = async () => {
+    setLoading(true);
 
-      const res = await fetch(
-        "https://mocki.io/v1/42840687-8977-40d6-9c96-b683266ee635",
-      );
+    await new Promise((resolve) => setTimeout(resolve, 2000)); 
 
-      const result = await res.json();
+    const res = await fetch(
+      "https://mocki.io/v1/42840687-8977-40d6-9c96-b683266ee635"
+    );
 
-      setData(result.data);
-      setTotal(result.total);
-      setLoading(false);
-    };
+    const result = await res.json();
 
-    fetchUsers();
-  }, []);
+    setData(result.data);
+    setTotal(result.total);
+    setLoading(false);
+  };
 
+  fetchUsers();
+}, []);
   const paginatedData = useMemo(() => {
     const start = pagination.pageIndex * pagination.pageSize;
     const end = start + pagination.pageSize;
@@ -278,217 +283,226 @@ const UsersTable = () => {
 
   return (
     <>
-      <div className={tableStyles.tableWrapper}>
-        <table className={tableStyles.table}>
-          <thead>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th key={header.id}>
-                    <div className={tableStyles.thContent}>
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext(),
-                      )}
+      <>
+        <div className={tableStyles.tableWrapper}>
+          {loading ? (
+            <TableSkeleton />
+          ) : (
+            <table className={tableStyles.table}>
+              <>
+                <thead>
+                  {table.getHeaderGroups().map((headerGroup) => (
+                    <tr key={headerGroup.id}>
+                      {headerGroup.headers.map((header) => (
+                        <th key={header.id}>
+                          <div className={tableStyles.thContent}>
+                            {flexRender(
+                              header.column.columnDef.header,
+                              header.getContext(),
+                            )}
 
-                      <div
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setOpenHeader(
-                            openHeader === header.id ? null : header.id,
-                          );
-                        }}
-                      >
-                        <DownwardEllipseeIcon />
-                      </div>
-                    </div>
-
-                    {openHeader === header.id && (
-                      <div className={tableStyles.filterDropdown}>
-                        <div className={tableStyles.optionCol}>
-                          <label>Organization</label>
-                          <Select
-                            options={organizationOptions}
-                            placeholder="Select"
-                            components={{ IndicatorSeparator: null }}
-                            styles={customSelectStyles}
-                          />
-                        </div>
-
-                        <div className={tableStyles.optionCol}>
-                          <label>Username</label>
-                          <input
-                            type="text"
-                            placeholder="User"
-                            className={tableStyles.inputStyles}
-                          />
-                        </div>
-
-                        <div className={tableStyles.optionCol}>
-                          <label>Email</label>
-                          <input
-                            type="text"
-                            placeholder="Email"
-                            className={tableStyles.inputStyles}
-                          />
-                        </div>
-
-                        <div className={tableStyles.optionCol}>
-                          <label>Date</label>
-                          <div className={tableStyles.calendarStyles}>
-                            <p>{date ? formattedDate : "Date"}</p>
-                            <div onClick={toggleCalendar}>
-                              <CalendarIcon />
+                            <div
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setOpenHeader(
+                                  openHeader === header.id ? null : header.id,
+                                );
+                              }}
+                            >
+                              <DownwardEllipseeIcon />
                             </div>
+                          </div>
 
-                            {isOpen && (
-                              <div className={tableStyles.calendarWrapper}>
-                                <DatePicker
-                                  value={date}
-                                  onChange={setDate}
-                                  placeholder="Choose date"
+                          {openHeader === header.id && (
+                            <div className={tableStyles.filterDropdown}>
+                              <div className={tableStyles.optionCol}>
+                                <label>Organization</label>
+                                <Select
+                                  options={organizationOptions}
+                                  placeholder="Select"
+                                  components={{ IndicatorSeparator: null }}
+                                  styles={customSelectStyles}
                                 />
                               </div>
-                            )}
-                          </div>
-                        </div>
 
-                        <div className={tableStyles.optionCol}>
-                          <label>Phone Number</label>
-                          <input
-                            type="text"
-                            placeholder="Phone Number"
-                            className={tableStyles.inputStyles}
-                          />
-                        </div>
+                              <div className={tableStyles.optionCol}>
+                                <label>Username</label>
+                                <input
+                                  type="text"
+                                  placeholder="User"
+                                  className={tableStyles.inputStyles}
+                                />
+                              </div>
 
-                        <div className={tableStyles.optionCol}>
-                          <label>Status</label>
-                          <Select
-                            options={options}
-                            placeholder="Status"
-                            components={{ IndicatorSeparator: null }}
-                            styles={customSelectStyles}
-                          />
-                        </div>
+                              <div className={tableStyles.optionCol}>
+                                <label>Email</label>
+                                <input
+                                  type="text"
+                                  placeholder="Email"
+                                  className={tableStyles.inputStyles}
+                                />
+                              </div>
 
-                        <div className={tableStyles.bottomBtn}>
-                          <button className={tableStyles.resetBtn}>
-                            Reset
-                          </button>
-                          <button className={tableStyles.filterBtn}>
-                            Filter
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
+                              <div className={tableStyles.optionCol}>
+                                <label>Date</label>
+                                <div className={tableStyles.calendarStyles}>
+                                  <p>{date ? formattedDate : "Date"}</p>
+                                  <div onClick={toggleCalendar}>
+                                    <CalendarIcon />
+                                  </div>
 
-          <tbody>
-            {table.getRowModel().rows.map((row) => (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                                  {isOpen && (
+                                    <div
+                                      className={tableStyles.calendarWrapper}
+                                    >
+                                      <DatePicker
+                                        value={date}
+                                        onChange={setDate}
+                                        placeholder="Choose date"
+                                      />
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
 
-      <div className={tableStyles.pagination}>
-       
-        <div className={tableStyles.showingWrapper}>
-          <span>Showing</span>
+                              <div className={tableStyles.optionCol}>
+                                <label>Phone Number</label>
+                                <input
+                                  type="text"
+                                  placeholder="Phone Number"
+                                  className={tableStyles.inputStyles}
+                                />
+                              </div>
 
-          <select
-            value={pagination.pageSize}
-            onChange={(e) =>
-              setPagination({
-                pageIndex: 0,
-                pageSize: Number(e.target.value),
-              })
-            }
-            // className={tableStyles.pageSizeSelect}
-          >
-            {[10, 25, 50, 100].map((size) => (
-              <option key={size} value={size}>
-                {size}
-              </option>
-            ))}
-          </select>
+                              <div className={tableStyles.optionCol}>
+                                <label>Status</label>
+                                <Select
+                                  options={options}
+                                  placeholder="Status"
+                                  components={{ IndicatorSeparator: null }}
+                                  styles={customSelectStyles}
+                                />
+                              </div>
 
-          <span>out of {total}</span>
-        </div>
+                              <div className={tableStyles.bottomBtn}>
+                                <button className={tableStyles.resetBtn}>
+                                  Reset
+                                </button>
+                                <button className={tableStyles.filterBtn}>
+                                  Filter
+                                </button>
+                              </div>
+                            </div>
+                          )}
+                        </th>
+                      ))}
+                    </tr>
+                  ))}
+                </thead>
 
-       
-        <div className={tableStyles.pageControls}>
-          <button
-            onClick={() =>
-              setPagination((prev) => ({
-                ...prev,
-                pageIndex: Math.max(prev.pageIndex - 1, 0),
-              }))
-            }
-            disabled={pagination.pageIndex === 0}
-            className={tableStyles.arrowBtn}
-          >
-            <LeftIcon/>
-          </button>
-
-          {generatePagination().map((item, index) =>
-            item === "..." ? (
-              <span key={index} className={tableStyles.ellipsis}>
-                ...
-              </span>
-            ) : (
-              <button
-                key={index}
-                onClick={() =>
-                  setPagination((prev) => ({
-                    ...prev,
-                    pageIndex: item as number,
-                  }))
-                }
-                className={
-                  pagination.pageIndex === item
-                    ? tableStyles.activePage
-                    : tableStyles.pageBtn
-                }
-              >
-                {(item as number) + 1}
-              </button>
-            ),
+                <tbody>
+                  {table.getRowModel().rows.map((row) => (
+                    <tr key={row.id}>
+                      {row.getVisibleCells().map((cell) => (
+                        <td key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext(),
+                          )}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </>
+            </table>
           )}
-
-          <button
-            onClick={() =>
-              setPagination((prev) => ({
-                ...prev,
-                pageIndex: Math.min(
-                  prev.pageIndex + 1,
-                  Math.ceil(total / pagination.pageSize) - 1,
-                ),
-              }))
-            }
-            disabled={
-              pagination.pageIndex ===
-              Math.ceil(total / pagination.pageSize) - 1
-            }
-            className={tableStyles.arrowBtn}
-          >
-            <RightIcon/>
-          </button>
         </div>
-      </div>
 
-    
+        <div className={tableStyles.pagination}>
+          <div className={tableStyles.showingWrapper}>
+            <span>Showing</span>
+
+            <select
+              value={pagination.pageSize}
+              onChange={(e) =>
+                setPagination({
+                  pageIndex: 0,
+                  pageSize: Number(e.target.value),
+                })
+              }
+              // className={tableStyles.pageSizeSelect}
+            >
+              {[10, 25, 50, 100].map((size) => (
+                <option key={size} value={size}>
+                  {size}
+                </option>
+              ))}
+            </select>
+
+            <span>out of {total}</span>
+          </div>
+
+          <div className={tableStyles.pageControls}>
+            <button
+              onClick={() =>
+                setPagination((prev) => ({
+                  ...prev,
+                  pageIndex: Math.max(prev.pageIndex - 1, 0),
+                }))
+              }
+              disabled={pagination.pageIndex === 0}
+              className={tableStyles.arrowBtn}
+            >
+              <LeftIcon />
+            </button>
+
+            {generatePagination().map((item, index) =>
+              item === "..." ? (
+                <span key={index} className={tableStyles.ellipsis}>
+                  ...
+                </span>
+              ) : (
+                <button
+                  key={index}
+                  onClick={() =>
+                    setPagination((prev) => ({
+                      ...prev,
+                      pageIndex: item as number,
+                    }))
+                  }
+                  className={
+                    pagination.pageIndex === item
+                      ? tableStyles.activePage
+                      : tableStyles.pageBtn
+                  }
+                >
+                  {(item as number) + 1}
+                </button>
+              ),
+            )}
+
+            <button
+              onClick={() =>
+                setPagination((prev) => ({
+                  ...prev,
+                  pageIndex: Math.min(
+                    prev.pageIndex + 1,
+                    Math.ceil(total / pagination.pageSize) - 1,
+                  ),
+                }))
+              }
+              disabled={
+                pagination.pageIndex ===
+                Math.ceil(total / pagination.pageSize) - 1
+              }
+              className={tableStyles.arrowBtn}
+            >
+              <RightIcon />
+            </button>
+          </div>
+        </div>
+      </>
     </>
   );
 };
