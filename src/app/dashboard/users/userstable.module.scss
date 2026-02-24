@@ -59,6 +59,7 @@
 .showingWrapper {
   display: flex;
   gap: 15px;
+  margin-top: 1rem;
 
   span {
     font-weight: 400;
@@ -283,9 +284,12 @@
     font-size: 12px;
     line-height: 100%;
     letter-spacing: 0%;
-    // text-transform: uppercase;
     color: $text-color;
     position: relative;
+     @media (max-width: 700px) {
+      padding: 10px;
+      white-space: nowrap;
+    }
   }
 
   .filterDropdown {
@@ -308,6 +312,11 @@
     padding: 25px 10px;
     font-size: 14px;
     border-top: 1px solid #eee;
+
+    @media (max-width: 700px) {
+      padding: 10px;
+      white-space: nowrap;
+    }
   }
   tr {
     position: relative;
@@ -340,10 +349,10 @@
   line-height: 100%;
   letter-spacing: 0px;
   text-align: center;
-   text-transform: capitalize;
+  text-transform: capitalize;
 }
 
-.skeletonWrapper{
+.skeletonWrapper {
   height: 600px;
 }
 
@@ -369,4 +378,6 @@
   display: flex;
   justify-content: space-between;
   padding: 2rem 0rem;
+
+  
 }
