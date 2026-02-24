@@ -144,15 +144,33 @@ const UsersTable = () => {
 
   const [pagination, setPagination] = useState({
     pageIndex: 0,
-    pageSize: 5,
+    pageSize: 10,
   });
+
+  // useEffect(() => {
+  //   const fetchUsers = async () => {
+  //     setLoading(true);
+
+  //     const res = await fetch(
+  //       `https://mocki.io/v1/42840687-8977-40d6-9c96-b683266ee635`,
+  //     );
+
+  //     const result = await res.json();
+
+  //     setData(result.data);
+  //     setTotal(result.total);
+  //     setLoading(false);
+  //   };
+
+  //   fetchUsers();
+  // }, [pagination.pageIndex, pagination.pageSize]);
 
   useEffect(() => {
     const fetchUsers = async () => {
       setLoading(true);
 
       const res = await fetch(
-        `https://mocki.io/v1/42840687-8977-40d6-9c96-b683266ee635`,
+        "https://mocki.io/v1/42840687-8977-40d6-9c96-b683266ee635",
       );
 
       const result = await res.json();
@@ -163,9 +181,13 @@ const UsersTable = () => {
     };
 
     fetchUsers();
-  }, [pagination.pageIndex, pagination.pageSize]);
+  }, []);
 
-  console.log("mock-data", data);
+  const paginatedData = useMemo(() => {
+    const start = pagination.pageIndex * pagination.pageSize;
+    const end = start + pagination.pageSize;
+    return data.slice(start, end);
+  }, [data, pagination]);
 
   const formattedDate = formatDateToDDMMYY(date);
 
@@ -207,8 +229,39 @@ const UsersTable = () => {
     [openRowId, setOpenRowId, router],
   );
 
+  const generatePagination = () => {
+    const totalPages = Math.ceil(total / pagination.pageSize);
+    const current = pagination.pageIndex;
+    const pages: (number | string)[] = [];
+
+    if (totalPages <= 7) {
+      return Array.from({ length: totalPages }, (_, i) => i);
+    }
+
+    pages.push(0);
+
+    if (current > 3) {
+      pages.push("...");
+    }
+
+    const start = Math.max(1, current - 1);
+    const end = Math.min(totalPages - 2, current + 1);
+
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+
+    if (current < totalPages - 4) {
+      pages.push("...");
+    }
+
+    pages.push(totalPages - 1);
+
+    return pages;
+  };
+
   const table = useReactTable({
-    data,
+    data: paginatedData,
     columns,
     pageCount: Math.ceil(total / pagination.pageSize),
     state: {
@@ -347,29 +400,93 @@ const UsersTable = () => {
         </table>
       </div>
 
-      {/* <div className={tableStyles.pagination}>
-        <button
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          {"<"}
-        </button>
+      <div className={tableStyles.pagination}>
+       
+        <div className={tableStyles.showingWrapper}>
+          <span>Showing</span>
 
-        <span>
-          Page {table.getState().pagination.pageIndex + 1} of{" "}
-          {table.getPageCount()}
-        </span>
+          <select
+            value={pagination.pageSize}
+            onChange={(e) =>
+              setPagination({
+                pageIndex: 0,
+                pageSize: Number(e.target.value),
+              })
+            }
+            // className={tableStyles.pageSizeSelect}
+          >
+            {[10, 25, 50, 100].map((size) => (
+              <option key={size} value={size}>
+                {size}
+              </option>
+            ))}
+          </select>
 
-        <button
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          {">"}
-        </button>
-      </div> */}
+          <span>out of {total}</span>
+        </div>
+
+        {/* Right side */}
+        <div className={tableStyles.pageControls}>
+          <button
+            onClick={() =>
+              setPagination((prev) => ({
+                ...prev,
+                pageIndex: Math.max(prev.pageIndex - 1, 0),
+              }))
+            }
+            disabled={pagination.pageIndex === 0}
+            className={tableStyles.arrowBtn}
+          >
+            {"<"}
+          </button>
+
+          {generatePagination().map((item, index) =>
+            item === "..." ? (
+              <span key={index} className={tableStyles.ellipsis}>
+                ...
+              </span>
+            ) : (
+              <button
+                key={index}
+                onClick={() =>
+                  setPagination((prev) => ({
+                    ...prev,
+                    pageIndex: item as number,
+                  }))
+                }
+                className={
+                  pagination.pageIndex === item
+                    ? tableStyles.activePage
+                    : tableStyles.pageBtn
+                }
+              >
+                {(item as number) + 1}
+              </button>
+            ),
+          )}
+
+          <button
+            onClick={() =>
+              setPagination((prev) => ({
+                ...prev,
+                pageIndex: Math.min(
+                  prev.pageIndex + 1,
+                  Math.ceil(total / pagination.pageSize) - 1,
+                ),
+              }))
+            }
+            disabled={
+              pagination.pageIndex ===
+              Math.ceil(total / pagination.pageSize) - 1
+            }
+            className={tableStyles.arrowBtn}
+          >
+            {">"}
+          </button>
+        </div>
+      </div>
 
       <div className={tableStyles.pagination}>
-        {/* Showing dropdown */}
         <div>
           Showing{" "}
           <select
@@ -388,50 +505,6 @@ const UsersTable = () => {
             ))}
           </select>{" "}
           out of {total}
-        </div>
-
-        {/* Page controls */}
-        <div>
-          <button
-            onClick={() =>
-              setPagination((prev) => ({
-                ...prev,
-                pageIndex: Math.max(prev.pageIndex - 1, 0),
-              }))
-            }
-            disabled={pagination.pageIndex === 0}
-          >
-            {"<"}
-          </button>
-
-          {Array.from({ length: totalPages }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() =>
-                setPagination((prev) => ({
-                  ...prev,
-                  pageIndex: index,
-                }))
-              }
-              className={
-                pagination.pageIndex === index ? tableStyles.activePage : ""
-              }
-            >
-              {index + 1}
-            </button>
-          ))}
-
-          <button
-            onClick={() =>
-              setPagination((prev) => ({
-                ...prev,
-                pageIndex: Math.min(prev.pageIndex + 1, totalPages - 1),
-              }))
-            }
-            disabled={pagination.pageIndex === totalPages - 1}
-          >
-            {">"}
-          </button>
         </div>
       </div>
     </>
