@@ -24,6 +24,8 @@ import { formatDateToDDMMYY } from "../../../../utils/helper";
 import EyeIcon from "@/components/icons/EyeIcon";
 import BlacklistIcon from "@/components/icons/BlacklistIcon";
 import ActivateUserIcon from "@/components/icons/ActivateUserIcon";
+import LeftIcon from "@/components/icons/LeftIcon";
+import RightIcon from "@/components/icons/RightIcon";
 
 interface StatusCellProps {
   getValue: () => unknown;
@@ -425,7 +427,7 @@ const UsersTable = () => {
           <span>out of {total}</span>
         </div>
 
-        {/* Right side */}
+       
         <div className={tableStyles.pageControls}>
           <button
             onClick={() =>
@@ -437,7 +439,7 @@ const UsersTable = () => {
             disabled={pagination.pageIndex === 0}
             className={tableStyles.arrowBtn}
           >
-            {"<"}
+            <LeftIcon/>
           </button>
 
           {generatePagination().map((item, index) =>
@@ -481,32 +483,12 @@ const UsersTable = () => {
             }
             className={tableStyles.arrowBtn}
           >
-            {">"}
+            <RightIcon/>
           </button>
         </div>
       </div>
 
-      <div className={tableStyles.pagination}>
-        <div>
-          Showing{" "}
-          <select
-            value={pagination.pageSize}
-            onChange={(e) =>
-              setPagination({
-                pageIndex: 0,
-                pageSize: Number(e.target.value),
-              })
-            }
-          >
-            {[5, 10, 25, 50, 100].map((size) => (
-              <option key={size} value={size}>
-                {size}
-              </option>
-            ))}
-          </select>{" "}
-          out of {total}
-        </div>
-      </div>
+    
     </>
   );
 };
