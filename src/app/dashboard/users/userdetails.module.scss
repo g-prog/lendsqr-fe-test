@@ -1,0 +1,18 @@
+@use "../../variables" as *;
+
+.detailsContainer {
+  padding: 2rem 3rem;
+}
+
+.topArrowDiv {
+  display: flex;
+  gap: 20px;
+
+  p {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0px;
+    margin: 8px 0 0 0;
+  }
+}

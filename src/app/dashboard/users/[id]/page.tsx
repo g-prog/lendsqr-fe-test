@@ -1,3 +1,9 @@
+import UserDetailsPageIndex from "../components/UserDetailsPageIndex";
+
 export default function DynamicUsersPage() {
-  return <div>Dynamic users page</div>;
+  return (
+    <div>
+      <UserDetailsPageIndex />
+    </div>
+  );
 }
