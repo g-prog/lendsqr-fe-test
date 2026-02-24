@@ -170,26 +170,25 @@ const UsersTable = () => {
   //   fetchUsers();
   // }, []);
 
-
   useEffect(() => {
-  const fetchUsers = async () => {
-    setLoading(true);
+    const fetchUsers = async () => {
+      setLoading(true);
 
-    await new Promise((resolve) => setTimeout(resolve, 2000)); 
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    const res = await fetch(
-      "https://mocki.io/v1/42840687-8977-40d6-9c96-b683266ee635"
-    );
+      const res = await fetch(
+        "https://mocki.io/v1/42840687-8977-40d6-9c96-b683266ee635",
+      );
 
-    const result = await res.json();
+      const result = await res.json();
 
-    setData(result.data);
-    setTotal(result.total);
-    setLoading(false);
-  };
+      setData(result.data);
+      setTotal(result.total);
+      setLoading(false);
+    };
 
-  fetchUsers();
-}, []);
+    fetchUsers();
+  }, []);
   const paginatedData = useMemo(() => {
     const start = pagination.pageIndex * pagination.pageSize;
     const end = start + pagination.pageSize;
@@ -279,146 +278,144 @@ const UsersTable = () => {
     getCoreRowModel: getCoreRowModel(),
   });
 
-  const totalPages = Math.ceil(total / pagination.pageSize);
+  // const totalPages = Math.ceil(total / pagination.pageSize);
 
   return (
     <>
-      <>
-        <div className={tableStyles.tableWrapper}>
-          {loading ? (
-            <TableSkeleton />
-          ) : (
-            <table className={tableStyles.table}>
-              <>
-                <thead>
-                  {table.getHeaderGroups().map((headerGroup) => (
-                    <tr key={headerGroup.id}>
-                      {headerGroup.headers.map((header) => (
-                        <th key={header.id}>
-                          <div className={tableStyles.thContent}>
-                            {flexRender(
-                              header.column.columnDef.header,
-                              header.getContext(),
-                            )}
+      <div className={tableStyles.tableWrapper}>
+        {loading ? (
+          <TableSkeleton />
+        ) : (
+          <table className={tableStyles.table}>
+            <>
+              <thead>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <tr key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => (
+                      <th key={header.id}>
+                        <div className={tableStyles.thContent}>
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext(),
+                          )}
 
-                            <div
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setOpenHeader(
-                                  openHeader === header.id ? null : header.id,
-                                );
-                              }}
-                            >
-                              <DownwardEllipseeIcon />
+                          <div
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setOpenHeader(
+                                openHeader === header.id ? null : header.id,
+                              );
+                            }}
+                          >
+                            <DownwardEllipseeIcon />
+                          </div>
+                        </div>
+
+                        {openHeader === header.id && (
+                          <div className={tableStyles.filterDropdown}>
+                            <div className={tableStyles.optionCol}>
+                              <label>Organization</label>
+                              <Select
+                                options={organizationOptions}
+                                placeholder="Select"
+                                components={{ IndicatorSeparator: null }}
+                                styles={customSelectStyles}
+                              />
+                            </div>
+
+                            <div className={tableStyles.optionCol}>
+                              <label>Username</label>
+                              <input
+                                type="text"
+                                placeholder="User"
+                                className={tableStyles.inputStyles}
+                              />
+                            </div>
+
+                            <div className={tableStyles.optionCol}>
+                              <label>Email</label>
+                              <input
+                                type="text"
+                                placeholder="Email"
+                                className={tableStyles.inputStyles}
+                              />
+                            </div>
+
+                            <div className={tableStyles.optionCol}>
+                              <label>Date</label>
+                              <div className={tableStyles.calendarStyles}>
+                                <p>{date ? formattedDate : "Date"}</p>
+                                <div onClick={toggleCalendar}>
+                                  <CalendarIcon />
+                                </div>
+
+                                {isOpen && (
+                                  <div className={tableStyles.calendarWrapper}>
+                                    <DatePicker
+                                      value={date}
+                                      onChange={setDate}
+                                      placeholder="Choose date"
+                                    />
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className={tableStyles.optionCol}>
+                              <label>Phone Number</label>
+                              <input
+                                type="text"
+                                placeholder="Phone Number"
+                                className={tableStyles.inputStyles}
+                              />
+                            </div>
+
+                            <div className={tableStyles.optionCol}>
+                              <label>Status</label>
+                              <Select
+                                options={options}
+                                placeholder="Status"
+                                components={{ IndicatorSeparator: null }}
+                                styles={customSelectStyles}
+                              />
+                            </div>
+
+                            <div className={tableStyles.bottomBtn}>
+                              <button className={tableStyles.resetBtn}>
+                                Reset
+                              </button>
+                              <button className={tableStyles.filterBtn}>
+                                Filter
+                              </button>
                             </div>
                           </div>
+                        )}
+                      </th>
+                    ))}
+                  </tr>
+                ))}
+              </thead>
 
-                          {openHeader === header.id && (
-                            <div className={tableStyles.filterDropdown}>
-                              <div className={tableStyles.optionCol}>
-                                <label>Organization</label>
-                                <Select
-                                  options={organizationOptions}
-                                  placeholder="Select"
-                                  components={{ IndicatorSeparator: null }}
-                                  styles={customSelectStyles}
-                                />
-                              </div>
+              <tbody>
+                {table.getRowModel().rows.map((row) => (
+                  <tr key={row.id}>
+                    {row.getVisibleCells().map((cell) => (
+                      <td key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </>
+          </table>
+        )}
+      </div>
 
-                              <div className={tableStyles.optionCol}>
-                                <label>Username</label>
-                                <input
-                                  type="text"
-                                  placeholder="User"
-                                  className={tableStyles.inputStyles}
-                                />
-                              </div>
-
-                              <div className={tableStyles.optionCol}>
-                                <label>Email</label>
-                                <input
-                                  type="text"
-                                  placeholder="Email"
-                                  className={tableStyles.inputStyles}
-                                />
-                              </div>
-
-                              <div className={tableStyles.optionCol}>
-                                <label>Date</label>
-                                <div className={tableStyles.calendarStyles}>
-                                  <p>{date ? formattedDate : "Date"}</p>
-                                  <div onClick={toggleCalendar}>
-                                    <CalendarIcon />
-                                  </div>
-
-                                  {isOpen && (
-                                    <div
-                                      className={tableStyles.calendarWrapper}
-                                    >
-                                      <DatePicker
-                                        value={date}
-                                        onChange={setDate}
-                                        placeholder="Choose date"
-                                      />
-                                    </div>
-                                  )}
-                                </div>
-                              </div>
-
-                              <div className={tableStyles.optionCol}>
-                                <label>Phone Number</label>
-                                <input
-                                  type="text"
-                                  placeholder="Phone Number"
-                                  className={tableStyles.inputStyles}
-                                />
-                              </div>
-
-                              <div className={tableStyles.optionCol}>
-                                <label>Status</label>
-                                <Select
-                                  options={options}
-                                  placeholder="Status"
-                                  components={{ IndicatorSeparator: null }}
-                                  styles={customSelectStyles}
-                                />
-                              </div>
-
-                              <div className={tableStyles.bottomBtn}>
-                                <button className={tableStyles.resetBtn}>
-                                  Reset
-                                </button>
-                                <button className={tableStyles.filterBtn}>
-                                  Filter
-                                </button>
-                              </div>
-                            </div>
-                          )}
-                        </th>
-                      ))}
-                    </tr>
-                  ))}
-                </thead>
-
-                <tbody>
-                  {table.getRowModel().rows.map((row) => (
-                    <tr key={row.id}>
-                      {row.getVisibleCells().map((cell) => (
-                        <td key={cell.id}>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext(),
-                          )}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </>
-            </table>
-          )}
-        </div>
-
+      {loading ? null : (
         <div className={tableStyles.pagination}>
           <div className={tableStyles.showingWrapper}>
             <span>Showing</span>
@@ -502,7 +499,7 @@ const UsersTable = () => {
             </button>
           </div>
         </div>
-      </>
+      )}
     </>
   );
 };
