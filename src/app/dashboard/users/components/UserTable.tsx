@@ -91,7 +91,7 @@ const StatusCell = ({
 
   return (
     <div className={tableStyles.statusContainer}>
-      <span className={`${tableStyles.status} ${tableStyles[status] || ""}`}>
+      <span className={`${tableStyles.status} ${tableStyles[status?.toLowerCase()] || ""}`}>
         {status}
       </span>
 

@@ -332,24 +332,32 @@
   justify-content: space-between;
 }
 
-.Inactive {
+.blacklisted {
+  background: #fde6eb;
+  color: #e4033b;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  text-align: center;
+}
+
+.inactive {
+  @extend .blacklisted;
   background: #e9ecef;
   color: #545f7d;
 }
 
-.Pending {
+.pending {
+  @extend .blacklisted;
   background: #fef7e0;
   color: #e9b200;
 }
 
-.Active {
+.active {
+  @extend .blacklisted;
   background: #e6f7ef;
   color: #39cd62;
-}
-
-.Blacklisted {
-  background: #fde6eb;
-  color: #e4033b;
 }
 
 .pagination {
