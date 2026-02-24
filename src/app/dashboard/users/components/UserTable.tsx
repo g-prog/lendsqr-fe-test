@@ -27,6 +27,7 @@ import ActivateUserIcon from "@/components/icons/ActivateUserIcon";
 import LeftIcon from "@/components/icons/LeftIcon";
 import RightIcon from "@/components/icons/RightIcon";
 import TableSkeleton from "@/components/datepicker/tableskeleton/TableSkeleton";
+import axios from "axios";
 
 interface StatusCellProps {
   getValue: () => unknown;
@@ -146,49 +147,44 @@ const UsersTable = () => {
   const [data, setData] = useState<User[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 10,
   });
 
-  // useEffect(() => {
-  //   const fetchUsers = async () => {
-  //     setLoading(true);
-
-  //     const res = await fetch(
-  //       "https://mocki.io/v1/42840687-8977-40d6-9c96-b683266ee635",
-  //     );
-
-  //     const result = await res.json();
-
-  //     setData(result.data);
-  //     setTotal(result.total);
-  //     setLoading(false);
-  //   };
-
-  //   fetchUsers();
-  // }, []);
+  
 
   useEffect(() => {
-    const fetchUsers = async () => {
+  const fetchUsers = async () => {
+    try {
       setLoading(true);
+      setError(null);
 
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
-      const res = await fetch(
-        "https://mocki.io/v1/42840687-8977-40d6-9c96-b683266ee635",
+      const response = await axios.get(
+        "https://mocki.io/v1/42840687-8977-40d6-9c96-b683266ee635" 
       );
 
-      const result = await res.json();
+      setData(response.data.data);
+      setTotal(response.data.total);
+    } catch (err: any) {
+      console.error("error", err);
 
-      setData(result.data);
-      setTotal(result.total);
+      const message =
+        err?.response?.data?.message ||
+        err?.response?.data?.error ||
+        err?.message ||
+        "Something went wrong while fetching users.";
+
+      setError(message);
+    } finally {
       setLoading(false);
-    };
+    }
+  };
 
-    fetchUsers();
-  }, []);
+  fetchUsers();
+}, []);
   const paginatedData = useMemo(() => {
     const start = pagination.pageIndex * pagination.pageSize;
     const end = start + pagination.pageSize;
@@ -285,6 +281,8 @@ const UsersTable = () => {
       <div className={tableStyles.tableWrapper}>
         {loading ? (
           <TableSkeleton />
+        ) : error ? (
+          <div className={tableStyles.errorText}>{error}</div>
         ) : (
           <table className={tableStyles.table}>
             <>
