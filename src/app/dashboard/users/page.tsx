@@ -1,8 +1,11 @@
 import UsersIndex from "./components/UsersIndex";
-export default function OverviewPage() {
+
+const UsersPage = () => {
   return (
     <div>
       <UsersIndex />
     </div>
   );
-}
+};
+
+export default UsersPage;

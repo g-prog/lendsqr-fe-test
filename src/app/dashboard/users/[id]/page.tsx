@@ -1,9 +1,11 @@
 import UserDetailsPageIndex from "../components/UserDetailsPageIndex";
 
-export default function DynamicUsersPage() {
+const DynamicUsersPage = () => {
   return (
     <div>
       <UserDetailsPageIndex />
     </div>
   );
-}
+};
+
+export default DynamicUsersPage;
