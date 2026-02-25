@@ -7,6 +7,7 @@ import FullStar from "@/components/icons/FullStar";
 import EmptyStar from "@/components/icons/EmptyStar";
 
 const UserDetailsPageIndex = () => {
+  const [display, setDisplay] = useState(0);
   const tabData = [
     {
       id: 0,
@@ -88,7 +89,13 @@ const UserDetailsPageIndex = () => {
 
         <div className={detailsStyles.bottomTabContainer}>
           {tabData?.map((item) => (
-            <div key={item.id} className={detailsStyles.tabItems}>
+            <div
+              key={item.id}
+              onClick={() => setDisplay(item.id)}
+              className={`${detailsStyles.tabItems} ${
+                display === item.id ? detailsStyles.activeTab : ""
+              }`}
+            >
               <p> {item.text}</p>
             </div>
           ))}

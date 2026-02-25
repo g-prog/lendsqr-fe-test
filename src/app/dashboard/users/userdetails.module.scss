@@ -10,18 +10,42 @@
   padding-top: 4rem;
 }
 
+// .tabItems {
+//   cursor: pointer;
+//   p {
+//     font-family: "Inter";
+//     font-weight: 400;
+//     font-size: 16px;
+//     line-height: 100%;
+//     letter-spacing: 0%;
+//     text-align: center;
+//     color: #000000CC;
+//     margin: 0;
+//     padding-bottom: 0.5rem;
+//   }
+// }
+
 .tabItems {
   cursor: pointer;
+
   p {
-    font-family: "Inter";
     font-weight: 400;
     font-size: 16px;
     line-height: 100%;
-    letter-spacing: 0%;
     text-align: center;
-    color: #000000CC;
+    color: #000000cc;
     margin: 0;
     padding-bottom: 0.5rem;
+  }
+}
+
+.activeTab {
+  border-bottom: 2px solid $torquoise-blue;
+
+  p {
+    color: $torquoise-blue;
+    font-weight: 400;
+    font-family: "Inter";
   }
 }
 
