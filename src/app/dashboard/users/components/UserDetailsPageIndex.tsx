@@ -125,7 +125,7 @@ const UserDetailsPageIndex = () => {
   ];
   return (
     <div className={detailsStyles.detailsContainer}>
-      <div className={detailsStyles.topArrowDiv}>
+      <div className={detailsStyles.topArrowDiv} onClick={() => router.back()}>
         <div>
           <LongForwardIcon />
         </div>
