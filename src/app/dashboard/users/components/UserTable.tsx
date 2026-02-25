@@ -4,14 +4,12 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
-  getPaginationRowModel,
   useReactTable,
-  CellContext,
   Row,
 } from "@tanstack/react-table";
 import { useRouter } from "next/navigation";
 import { User } from "./types";
-import { usersData } from "./data";
+// import { usersData } from "./data";
 import tableStyles from "../userstable.module.scss";
 import { useMemo, useState, useEffect, useRef } from "react";
 import DownwardEllipseeIcon from "../../../../components/icons/DownWardEllipseeIcon";
