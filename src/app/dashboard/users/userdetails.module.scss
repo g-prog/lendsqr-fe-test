@@ -16,3 +16,64 @@
     margin: 8px 0 0 0;
   }
 }
+
+.topFlex {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 0rem;
+}
+
+.userHeader {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  margin: 13px 0 0 0;
+  color: $thick-blue;
+}
+
+.blackListBtn {
+  border: 1px solid $bright-red;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 10%;
+  text-align: center;
+  text-transform: uppercase;
+  color: $bright-red;
+  background: transparent;
+  padding: 1rem 3rem;
+  outline: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.activateBtn {
+  @extend .blackListBtn;
+  border: 1px solid $torquoise-blue;
+  color: $torquoise-blue;
+}
+
+.topRight {
+  display: flex;
+  gap: 20px;
+}
+
+.generalInfoDiv {
+  border: 1px solid #213f7d0f;
+  box-shadow: 3px 5px 20px 0px #0000000a;
+  background: $pure-white;
+  border-radius: 4px;
+  padding: 2rem 3rem;
+  margin-top: 1rem;
+}
+
+.iconContainer {
+  background: #213f7d29;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
