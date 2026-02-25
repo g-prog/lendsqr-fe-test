@@ -5,15 +5,61 @@ import LongForwardIcon from "@/components/icons/LongForwardIcon";
 import SvgAvatar from "@/components/icons/SvgAvatar";
 import FullStar from "@/components/icons/FullStar";
 import EmptyStar from "@/components/icons/EmptyStar";
+import DetailsSection from "./DetailsSection";
 
 const UserDetailsPageIndex = () => {
   const [display, setDisplay] = useState(0);
+
+  const personalInfo = [
+    { label: "Full Name", value: "Grace Effiom" },
+    { label: "Phone Number", value: "07060780922" },
+    { label: "Email Address", value: "grace@gmail.com" },
+    { label: "BVN", value: "07060780922" },
+    { label: "Gender", value: "Female" },
+    { label: "Marital Status", value: "Single" },
+    { label: "Children", value: "None" },
+    { label: "Type of Residence", value: "Parent’s Apartment" },
+  ];
+
+  const educationInfo = [
+    { label: "Level of Education", value: "B.Sc" },
+    { label: "Employment Status", value: "Employed" },
+    { label: "Sector of Employment", value: "FinTech" },
+    { label: "Duration of Employment", value: "2 years" },
+    { label: "Office Email", value: "grace@lendsqr.com" },
+    { label: "Monthly Income", value: "₦200,000 - ₦400,000" },
+    { label: "Loan Repayment", value: "40,000" },
+  ];
+
+  const socialsInfo = [
+    { label: "Twitter", value: "@grace_effiom" },
+    { label: "Facebook", value: "Grace Effiom" },
+    { label: "Instagram", value: "@grace_effiom" },
+  ];
+
+  const guarantorInfo = [
+    { label: "Full Name", value: "Debby Ogana" },
+    { label: "Phone Number", value: "07060780922" },
+    { label: "Email Address", value: "debby@gmail.com" },
+    { label: "Relationship", value: "Sister" },
+  ];
 
   const tabData = [
     {
       id: 0,
       text: "General Details",
-      display: <div>Personal profile</div>,
+      display: (
+        <>
+          <DetailsSection title="Personal Information" items={personalInfo} />
+          <DetailsSection
+            title="Education and Employment"
+            items={educationInfo}
+          />
+          <DetailsSection title="Socials" items={socialsInfo} />
+          <DetailsSection title="Guarantor" items={guarantorInfo} />
+            <DetailsSection title="" items={guarantorInfo} />
+        </>
+      ),
     },
 
     {
@@ -108,8 +154,11 @@ const UserDetailsPageIndex = () => {
           ))}
         </div>
       </div>
-
-      <div className={detailsStyles.displayDiv}>{tabData[display].display}</div>
+      <div className={detailsStyles.wrapper}>
+        <div className={detailsStyles.displayDiv}>
+          {tabData[display].display}
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,7 +1,50 @@
 @use "../../variables" as *;
 
+.section {
+  padding: 2rem 0;
+}
+
+.sectionTitle {
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #213f7d;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem 2rem;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #545f7d;
+  margin-bottom: 0.4rem;
+}
+
+.value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #213f7d;
+}
+
+.divider {
+  margin-top: 2rem;
+  border-bottom: 1px solid #e5e5e5;
+}
+
 .detailsContainer {
-  padding: 2rem 3rem 0rem 3rem;
+  padding: 2rem 3rem 5rem 3rem;
+}
+
+.wrapper{
+  padding-bottom: 3rem;
 }
 
 .displayDiv{
@@ -10,7 +53,7 @@
   background: $pure-white;
   border-radius: 4px;
   margin-top: 3rem;
-  padding: 1rem 2rem;
+  padding: 1rem 2rem 6rem 2rem;
 }
 
 .bottomTabContainer {
