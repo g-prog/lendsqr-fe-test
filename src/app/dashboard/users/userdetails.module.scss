@@ -1,7 +1,7 @@
 @use "../../variables" as *;
 
 .section {
-  // padding: 1rem 0;
+  width: 100%;
 }
 
 .sectionTitle {
@@ -28,7 +28,7 @@
 .label {
   font-size: 12px;
   text-transform: uppercase;
-  color: #545F7D;
+  color: #545f7d;
   font-weight: 400;
   margin: 0;
 }
@@ -110,6 +110,10 @@
   gap: 20px;
   padding-right: 3rem;
   border-right: 1px solid #545f7d33;
+
+  @media (max-width: 710px) {
+    border-right: 1px solid transparent;
+  }
 }
 
 .tierContainer {
@@ -133,6 +137,11 @@
   gap: 13px;
   border-left: 1px solid #545f7d33;
   padding-left: 1.5rem;
+  height: 100px;
+
+  @media (max-width: 710px) {
+    border-left: 1px solid transparent;
+  }
 
   h4 {
     font-weight: 500;
@@ -170,6 +179,9 @@
     letter-spacing: 0px;
     color: $primary-color;
     margin: 0;
+    @media (max-width: 710px) {
+      font-size: 14px;
+    }
   }
 
   p {
@@ -178,6 +190,10 @@
     line-height: 100%;
     letter-spacing: 0px;
     margin: 0;
+
+    @media (max-width: 710px) {
+      font-size: 12px;
+    }
   }
 }
 
@@ -185,6 +201,11 @@
   display: flex;
   justify-content: space-between;
   padding: 2rem 0rem;
+
+  @media (max-width: 599px) {
+    flex-direction: column;
+    gap: 40px;
+  }
 }
 
 .userHeader {
@@ -194,6 +215,10 @@
   letter-spacing: 0px;
   margin: 13px 0 0 0;
   color: $thick-blue;
+
+  @media (max-width: 599px) {
+    text-align: center;
+  }
 }
 
 .blackListBtn {
@@ -210,6 +235,15 @@
   outline: none;
   border-radius: 8px;
   cursor: pointer;
+
+  @media (max-width: 699px) {
+    padding: 1rem;
+  }
+
+  @media (max-width: 500px) {
+    padding: 0.5rem;
+    font-size: 10px;
+  }
 }
 
 .activateBtn {
@@ -223,6 +257,14 @@
   gap: 20px;
 }
 
+.center {
+  @media (max-width: 710px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 .generalInfoDiv {
   border: 1px solid #213f7d0f;
   box-shadow: 3px 5px 20px 0px #0000000a;
@@ -230,11 +272,19 @@
   border-radius: 4px;
   padding: 2rem 3rem 0rem 3rem;
   margin-top: 1rem;
+
+  @media (max-width: 699px) {
+    padding: 2rem 1rem;
+  }
 }
 
 .infoWrapper {
   display: flex;
   gap: 40px;
+
+  @media (max-width: 710px) {
+    flex-direction: column;
+  }
 }
 
 .iconContainer {
