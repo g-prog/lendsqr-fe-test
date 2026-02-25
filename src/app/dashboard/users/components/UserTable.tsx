@@ -164,8 +164,8 @@ const UsersTable = () => {
         "https://mocki.io/v1/42840687-8977-40d6-9c96-b683266ee635" 
       );
 
-      setData(response.data.data);
-      setTotal(response.data.total);
+      setData(response?.data?.data);
+      setTotal(response?.data?.total);
     } catch (err: any) {
       console.error("error", err);
 

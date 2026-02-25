@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 import detailsStyles from "../userdetails.module.scss";
 import LongForwardIcon from "@/components/icons/LongForwardIcon";
 import SvgAvatar from "@/components/icons/SvgAvatar";
@@ -5,6 +7,37 @@ import FullStar from "@/components/icons/FullStar";
 import EmptyStar from "@/components/icons/EmptyStar";
 
 const UserDetailsPageIndex = () => {
+  const tabData = [
+    {
+      id: 0,
+      text: "General Details",
+    },
+
+    {
+      id: 1,
+      text: "Documents",
+    },
+
+    {
+      id: 2,
+      text: "Bank Details",
+    },
+
+    {
+      id: 3,
+      text: "Loans",
+    },
+
+    {
+      id: 4,
+      text: "Savings",
+    },
+
+    {
+      id: 5,
+      text: "App and System",
+    },
+  ];
   return (
     <div className={detailsStyles.detailsContainer}>
       <div className={detailsStyles.topArrowDiv}>
@@ -51,6 +84,14 @@ const UserDetailsPageIndex = () => {
             <h4>₦200,000.00</h4>
             <p>9912345678/Providus Bank</p>
           </div>
+        </div>
+
+        <div className={detailsStyles.bottomTabContainer}>
+          {tabData?.map((item) => (
+            <div key={item.id} className={detailsStyles.tabItems}>
+              <p> {item.text}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>

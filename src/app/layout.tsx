@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Work_Sans,  Montserrat, Roboto } from "next/font/google";
+import { Work_Sans,  Montserrat, Roboto, Inter   } from "next/font/google";
 import "./globals.scss";
 
 const workSans = Work_Sans({
@@ -7,6 +7,12 @@ const workSans = Work_Sans({
   weight: ['400', '500', '600', '700'],
   variable: '--font-work-sans'
 })
+
+const inter = Inter({
+  subsets: ["latin"],
+   weight: ['400', '500', '600', '700'],
+  variable: "--font-inter",
+});
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -31,7 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${workSans.variable} ${montserrat.variable} ${roboto.variable}`}>
+      <body className={`${workSans.variable} ${montserrat.variable} ${roboto.variable} ${inter.variable}`}>
         {children}
       </body>
     </html>
