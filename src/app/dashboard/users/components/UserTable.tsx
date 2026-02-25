@@ -162,8 +162,12 @@ const UsersTable = () => {
           "https://mocki.io/v1/42840687-8977-40d6-9c96-b683266ee635",
         );
 
-        setData(response?.data?.data);
+        const users = response?.data?.data;
+
+        setData(users);
         setTotal(response?.data?.total);
+
+        localStorage.setItem("users", JSON.stringify(users));
       } catch (err: any) {
         console.error("error", err);
 
@@ -181,6 +185,7 @@ const UsersTable = () => {
 
     fetchUsers();
   }, []);
+
   const paginatedData = useMemo(() => {
     const start = pagination.pageIndex * pagination.pageSize;
     const end = start + pagination.pageSize;

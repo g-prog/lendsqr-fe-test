@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams, useRouter } from "next/navigation";
 import detailsStyles from "../userdetails.module.scss";
 import LongForwardIcon from "@/components/icons/LongForwardIcon";
 import SvgAvatar from "@/components/icons/SvgAvatar";
@@ -8,12 +9,39 @@ import EmptyStar from "@/components/icons/EmptyStar";
 import DetailsSection from "./DetailsSection";
 
 const UserDetailsPageIndex = () => {
+  const { id } = useParams();
   const [display, setDisplay] = useState(0);
+  const router = useRouter();
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    if (!id) return;
+
+    const decodedUsername = decodeURIComponent(id as string);
+
+    const storedUsers = localStorage.getItem("users");
+
+    if (!storedUsers) return;
+
+    const users = JSON.parse(storedUsers);
+
+    const selectedUser = users.find(
+      (user: any) => user.username === decodedUsername,
+    );
+
+    setUser(selectedUser);
+  }, [id]);
+
+  if (!user) return <p>User not found</p>;
+
+ 
+
+  if (!user) return <p style={{textAlign: 'center'}}>Loading...</p>;
 
   const personalInfo = [
-    { label: "Full Name", value: "Grace Effiom" },
-    { label: "Phone Number", value: "07060780922" },
-    { label: "Email Address", value: "grace@gmail.com" },
+    { label: "Full Name", value: user.username },
+    { label: "Phone Number", value: user.phoneNumber },
+    { label: "Email Address", value: user.email },
     { label: "BVN", value: "07060780922" },
     { label: "Gender", value: "Female" },
     { label: "Marital Status", value: "Single" },
@@ -57,7 +85,7 @@ const UserDetailsPageIndex = () => {
           />
           <DetailsSection title="Socials" items={socialsInfo} />
           <DetailsSection title="Guarantor" items={guarantorInfo} />
-            <DetailsSection title="" items={guarantorInfo} />
+          <DetailsSection title="" items={guarantorInfo} />
         </>
       ),
     },
@@ -118,7 +146,7 @@ const UserDetailsPageIndex = () => {
             </div>
 
             <div className={detailsStyles.nameCol}>
-              <h4>Grace Effiom</h4>
+              <h4>{user?.username}</h4>
 
               <p>LSQFf587g90</p>
             </div>
