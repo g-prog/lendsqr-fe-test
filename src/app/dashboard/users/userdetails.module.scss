@@ -4,26 +4,22 @@
   padding: 2rem 3rem 0rem 3rem;
 }
 
+.displayDiv{
+  border: 1px solid #213F7D0F;
+  box-shadow: 3px 5px 20px 0px #0000000A;
+  background: $pure-white;
+  border-radius: 4px;
+  margin-top: 3rem;
+  padding: 1rem 2rem;
+}
+
 .bottomTabContainer {
   display: flex;
   justify-content: space-between;
   padding-top: 4rem;
 }
 
-// .tabItems {
-//   cursor: pointer;
-//   p {
-//     font-family: "Inter";
-//     font-weight: 400;
-//     font-size: 16px;
-//     line-height: 100%;
-//     letter-spacing: 0%;
-//     text-align: center;
-//     color: #000000CC;
-//     margin: 0;
-//     padding-bottom: 0.5rem;
-//   }
-// }
+
 
 .tabItems {
   cursor: pointer;
@@ -87,7 +83,7 @@
 .numeralContainer {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 13px;
   border-left: 1px solid #545f7d33;
   padding-left: 1.5rem;
 

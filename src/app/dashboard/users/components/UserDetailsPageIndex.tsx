@@ -12,31 +12,37 @@ const UserDetailsPageIndex = () => {
     {
       id: 0,
       text: "General Details",
+      display: <div>Personal profile</div>,
     },
 
     {
       id: 1,
       text: "Documents",
+      display: <div>Documents</div>,
     },
 
     {
       id: 2,
       text: "Bank Details",
+      display: <div>Bank Details</div>,
     },
 
     {
       id: 3,
       text: "Loans",
+      display: <div>Loans</div>,
     },
 
     {
       id: 4,
       text: "Savings",
+      display: <div>Savings</div>,
     },
 
     {
       id: 5,
       text: "App and System",
+      display: <div>App and System</div>,
     },
   ];
   return (
@@ -100,7 +106,11 @@ const UserDetailsPageIndex = () => {
             </div>
           ))}
         </div>
+
+      
       </div>
+
+        <div className={detailsStyles.displayDiv}>{tabData[display].display}</div>
     </div>
   );
 };
