@@ -8,6 +8,7 @@ import EmptyStar from "@/components/icons/EmptyStar";
 
 const UserDetailsPageIndex = () => {
   const [display, setDisplay] = useState(0);
+
   const tabData = [
     {
       id: 0,
@@ -106,11 +107,9 @@ const UserDetailsPageIndex = () => {
             </div>
           ))}
         </div>
-
-      
       </div>
 
-        <div className={detailsStyles.displayDiv}>{tabData[display].display}</div>
+      <div className={detailsStyles.displayDiv}>{tabData[display].display}</div>
     </div>
   );
 };

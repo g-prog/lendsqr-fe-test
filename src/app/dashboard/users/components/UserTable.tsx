@@ -152,37 +152,35 @@ const UsersTable = () => {
     pageSize: 10,
   });
 
-  
-
   useEffect(() => {
-  const fetchUsers = async () => {
-    try {
-      setLoading(true);
-      setError(null);
+    const fetchUsers = async () => {
+      try {
+        setLoading(true);
+        setError(null);
 
-      const response = await axios.get(
-        "https://mocki.io/v1/42840687-8977-40d6-9c96-b683266ee635" 
-      );
+        const response = await axios.get(
+          "https://mocki.io/v1/42840687-8977-40d6-9c96-b683266ee635",
+        );
 
-      setData(response?.data?.data);
-      setTotal(response?.data?.total);
-    } catch (err: any) {
-      console.error("error", err);
+        setData(response?.data?.data);
+        setTotal(response?.data?.total);
+      } catch (err: any) {
+        console.error("error", err);
 
-      const message =
-        err?.response?.data?.message ||
-        err?.response?.data?.error ||
-        err?.message ||
-        "Something went wrong while fetching users.";
+        const message =
+          err?.response?.data?.message ||
+          err?.response?.data?.error ||
+          err?.message ||
+          "Something went wrong while fetching users.";
 
-      setError(message);
-    } finally {
-      setLoading(false);
-    }
-  };
+        setError(message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  fetchUsers();
-}, []);
+    fetchUsers();
+  }, []);
   const paginatedData = useMemo(() => {
     const start = pagination.pageIndex * pagination.pageSize;
     const end = start + pagination.pageSize;
@@ -281,6 +279,8 @@ const UsersTable = () => {
           <TableSkeleton />
         ) : error ? (
           <div className={tableStyles.errorText}>{error}</div>
+        ) : data?.length === 0 ? (
+          <div>No data currently</div>
         ) : (
           <table className={tableStyles.table}>
             <>
