@@ -15,6 +15,20 @@ import CloseIcon from "../../components/icons/CloseIcon";
 import GuarantorsIcon from "../../components/icons/GuarantorsIcon";
 import LoansIcon from "../../components/icons/LoansIcon";
 import HandshakeIcon from "../../components/icons/HandshakeIcon";
+import SavingsIcon from "@/components/icons/SavingsIcon";
+import LoanRequestIcon from "@/components/icons/LoanRequestIcon";
+import WhitelistIcon from "@/components/icons/WhitelistIcon";
+import KarmaIcon from "@/components/icons/KarmaIcon";
+import SavingsProductIcon from "@/components/icons/SavingsProductIcon";
+import FeesAndCharges from "@/components/icons/FeesAndCharges";
+import TransactionsIcon from "@/components/icons/TransactionsIcon";
+import ServicesIcon from "@/components/icons/ServicesIcon";
+import ServiceAccount from "@/components/icons/ServiceAccount";
+import SettlementsIcon from "@/components/icons/SettlementsIcon";
+import ReportsIcon from "@/components/icons/ReportsIcon";
+import PreferencesIcon from "@/components/icons/PreferencesIcon";
+import FeesAndPricing from "@/components/icons/FeesAndPricing";
+import AuditLogs from "@/components/icons/AuditLogs";
 
 export default function DashboardLayout({
   children,
@@ -58,93 +72,116 @@ export default function DashboardLayout({
 
     {
       id: 5,
-      icon: <HomeIcon />,
+      icon: <SavingsIcon />,
       text: "Savings",
       link: "/dashboard/user3",
     },
 
     {
       id: 6,
-      icon: <HomeIcon />,
+      icon: <LoanRequestIcon />,
       text: "Loan Requests",
       link: "/dashboard/user4",
     },
 
     {
       id: 7,
-      icon: <HomeIcon />,
+      icon: <WhitelistIcon />,
       text: "Whitelist",
       link: "/dashboard/user5",
     },
 
     {
       id: 8,
-      icon: <HomeIcon />,
+      icon: <KarmaIcon />,
       text: "Karma",
       link: "/dashboard/user6",
+    },
+  ];
+
+  const dashboardItemsSettings = [
+    {
+      id: 0,
+      icon: <PreferencesIcon />,
+      text: "Preferences",
+      link: "/preferences",
+    },
+
+    {
+      id: 1,
+      icon: <FeesAndPricing />,
+      text: "Fees and Pricing",
+      link: "/dashboard/guarantors",
+    },
+
+    {
+      id: 3,
+      icon: <AuditLogs />,
+      text: "Audit Logs",
+      link: "/dashboard/user1",
     },
   ];
 
   const dashboardItemsBusiness = [
     {
       id: 0,
-      icon: <UserIcon />,
+      icon: <BriefCaseIcon />,
       text: "Organization",
       link: "/dashboard/users12",
     },
 
     {
       id: 1,
-      icon: <HomeIcon />,
+      icon: <LoanRequestIcon />,
       text: "Loan Products",
       link: "/dashboard/guarantors",
     },
 
     {
       id: 3,
-      icon: <HomeIcon />,
+      icon: <SavingsProductIcon />,
       text: "Savings Products",
       link: "/dashboard/user1",
     },
 
     {
       id: 4,
-      icon: <HomeIcon />,
+      icon: <FeesAndCharges />,
       text: "Fees and Charges",
       link: "/dashboard/user2",
     },
 
     {
       id: 5,
-      icon: <HomeIcon />,
+      icon: <TransactionsIcon />,
       text: "Transactions",
       link: "/dashboard/user3",
     },
 
     {
       id: 6,
-      icon: <HomeIcon />,
+      icon: <ServicesIcon />,
       text: "Services",
       link: "/dashboard/user4",
     },
 
     {
       id: 7,
-      icon: <HomeIcon />,
+      icon: <ServiceAccount />,
       text: "Service Account",
       link: "/dashboard/user5",
     },
 
     {
       id: 8,
-      icon: <HomeIcon />,
+      icon: <SettlementsIcon />,
       text: "Settlements",
       link: "/dashboard/user6",
     },
 
     {
       id: 9,
-      icon: <HomeIcon />,
+      icon: <ReportsIcon />,
       text: "Reports",
       link: "/dashboard/user6",
     },
@@ -244,6 +281,25 @@ export default function DashboardLayout({
                 );
               })}
             </div>
+
+             <div className={layoutStyles.linksSection}>
+              <p className={layoutStyles.sectionHeaderText}>SETTINGS</p>
+
+              {dashboardItemsSettings.map((item) => {
+                const isActive = pathname === item.link;
+
+                return (
+                  <div
+                    key={item.id}
+                    className={`${layoutStyles.linkItems} ${isActive ? layoutStyles.activeLink : ""}`}
+                    onClick={() => router.push(item.link)}
+                  >
+                    <div>{item.icon}</div>
+                    <p>{item.text}</p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       )}
@@ -286,6 +342,25 @@ export default function DashboardLayout({
               <p className={layoutStyles.sectionHeaderText}>BUSINESS</p>
 
               {dashboardItemsBusiness.map((item) => {
+                const isActive = pathname === item.link;
+
+                return (
+                  <div
+                    key={item.id}
+                    className={`${layoutStyles.linkItems} ${isActive ? layoutStyles.activeLink : ""}`}
+                    onClick={() => router.push(item.link)}
+                  >
+                    <div>{item.icon}</div>
+                    <p>{item.text}</p>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className={layoutStyles.linksSection}>
+              <p className={layoutStyles.sectionHeaderText}>SETTINGS</p>
+
+              {dashboardItemsSettings.map((item) => {
                 const isActive = pathname === item.link;
 
                 return (
