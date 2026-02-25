@@ -1,37 +1,43 @@
 @use "../../variables" as *;
 
 .section {
-  padding: 2rem 0;
+  padding: 1rem 0;
 }
 
 .sectionTitle {
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  color: #213f7d;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: $primary-color;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem 2rem;
+  padding: 2rem 0rem;
 }
 
 .item {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
 .label {
   font-size: 12px;
   text-transform: uppercase;
   color: #545f7d;
-  margin-bottom: 0.4rem;
+  margin: 0;
+  // margin-bottom: 0.4rem;
 }
 
 .value {
   font-size: 14px;
   font-weight: 500;
   color: #213f7d;
+  margin: 0;
 }
 
 .divider {
@@ -43,13 +49,13 @@
   padding: 2rem 3rem 5rem 3rem;
 }
 
-.wrapper{
+.wrapper {
   padding-bottom: 3rem;
 }
 
-.displayDiv{
-  border: 1px solid #213F7D0F;
-  box-shadow: 3px 5px 20px 0px #0000000A;
+.displayDiv {
+  border: 1px solid #213f7d0f;
+  box-shadow: 3px 5px 20px 0px #0000000a;
   background: $pure-white;
   border-radius: 4px;
   margin-top: 3rem;
@@ -61,8 +67,6 @@
   justify-content: space-between;
   padding-top: 4rem;
 }
-
-
 
 .tabItems {
   cursor: pointer;
