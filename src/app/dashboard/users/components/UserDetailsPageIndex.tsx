@@ -34,9 +34,7 @@ const UserDetailsPageIndex = () => {
 
   if (!user) return <p>User not found</p>;
 
- 
-
-  if (!user) return <p style={{textAlign: 'center'}}>Loading...</p>;
+  if (!user) return <p style={{ textAlign: "center" }}>Loading...</p>;
 
   const personalInfo = [
     { label: "Full Name", value: user.username },
@@ -78,14 +76,19 @@ const UserDetailsPageIndex = () => {
       text: "General Details",
       display: (
         <>
-          <DetailsSection title="Personal Information" items={personalInfo} />
+          <DetailsSection
+            title="Personal Information"
+            items={personalInfo}
+            show={true}
+          />
           <DetailsSection
             title="Education and Employment"
             items={educationInfo}
+            show={true}
           />
-          <DetailsSection title="Socials" items={socialsInfo} />
-          <DetailsSection title="Guarantor" items={guarantorInfo} />
-          <DetailsSection title="" items={guarantorInfo} />
+          <DetailsSection title="Socials" items={socialsInfo} show={true} />
+          <DetailsSection title="Guarantor" items={guarantorInfo} show={true} />
+          <DetailsSection title="" items={guarantorInfo} show={false} />
         </>
       ),
     },

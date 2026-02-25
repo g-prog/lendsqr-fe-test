@@ -1,4 +1,4 @@
-import detailsStyles from '../userdetails.module.scss'
+import detailsStyles from "../userdetails.module.scss";
 
 interface InfoItem {
   label: string;
@@ -8,15 +8,16 @@ interface InfoItem {
 interface SectionProps {
   title: string;
   items: InfoItem[];
+  show: boolean;
 }
 
-const DetailsSection = ({ title, items }: SectionProps) => {
+const DetailsSection = ({ title, items, show = true }: SectionProps) => {
   return (
     <div className={detailsStyles.section}>
       <h4 className={detailsStyles.sectionTitle}>{title}</h4>
 
       <div className={detailsStyles.grid}>
-        {items.map((item, index) => (
+        {items?.map((item, index) => (
           <div key={index} className={detailsStyles.item}>
             <p className={detailsStyles.label}>{item.label}</p>
             <p className={detailsStyles.value}>{item.value}</p>
@@ -24,9 +25,9 @@ const DetailsSection = ({ title, items }: SectionProps) => {
         ))}
       </div>
 
-      <div className={detailsStyles.divider} />
+      {show ? <div className={detailsStyles.divider} /> : null}
     </div>
   );
 };
 
-export default DetailsSection
+export default DetailsSection;
