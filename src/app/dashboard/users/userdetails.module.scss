@@ -66,6 +66,10 @@
   display: flex;
   justify-content: space-between;
   padding-top: 4rem;
+
+  @media (max-width: 500px) {
+    gap: 20px;
+  }
 }
 
 .tabItems {
@@ -79,6 +83,15 @@
     color: #000000cc;
     margin: 0;
     padding-bottom: 0.5rem;
+
+    @media (max-width: 500px) {
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 720px) {
+      font-size: 12px;
+    }
   }
 }
 
@@ -243,7 +256,7 @@
   border-radius: 8px;
   cursor: pointer;
 
-  @media (max-width: 699px) {
+  @media (max-width: 719px) {
     padding: 1rem;
   }
 
@@ -282,6 +295,7 @@
 
   @media (max-width: 799px) {
     padding: 2rem 1rem 0rem 1rem;
+    overflow-x: auto;
   }
 
   @media (max-width: 699px) {
