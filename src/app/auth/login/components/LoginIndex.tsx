@@ -8,10 +8,13 @@ export default function LoginIndex() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [emailTouched, setEmailTouched] = useState(false);
 
   const isValidEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
+
+  const emailError = emailTouched && email.length > 0 && !isValidEmail(email);
 
   const isFormValid = email && password && isValidEmail(email);
 
@@ -45,11 +48,20 @@ export default function LoginIndex() {
               <div className={styles.inputContainer}>
                 <input
                   type="text"
-                  className={styles.inputStyles}
+                  className={`${styles.inputStyles} ${
+                    emailError ? styles.inputError : ""
+                  }`}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  onBlur={() => setEmailTouched(true)}
                   placeholder="Email"
                 />
+
+                {emailError && (
+                  <p className={styles.errorText}>
+                    Please provide a valid email address
+                  </p>
+                )}
 
                 <div className={styles.passwordWrapperStyles}>
                   <input
