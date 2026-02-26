@@ -223,3 +223,8 @@
     box-shadow: 0 4px 8px rgba(33, 63, 125, 0.15);
   }
 }
+
+.loginButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
