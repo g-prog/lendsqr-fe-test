@@ -21,13 +21,17 @@
   padding: 6rem;
   background: $fainted-grey;
 
-  @media (max-width: 799px) {
-    padding: 1rem 3rem;
-  }
+  // @media (max-width: 799px) {
+  //   padding: 1rem 3rem;
+  // }
 
-  @media (max-width: 700px) {
-    width: 100%;
-    padding: 1rem 3rem;
+  // @media (max-width: 700px) {
+  //   width: 100%;
+  //   padding: 1rem 3rem;
+  // }
+
+  @media (max-width: 899px) {
+    display: none;
   }
 }
 
@@ -41,7 +45,7 @@
     padding: 0rem 3rem;
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: 899px) {
     width: 100%;
     padding: 0rem 3rem;
   }
@@ -90,7 +94,7 @@
     color: $thick-blue;
     margin: 0;
 
-    @media (max-width: 700px) {
+    @media (max-width: 899px) {
       text-align: center;
     }
   }
@@ -104,7 +108,7 @@
   letter-spacing: 0%;
   color: $text-color;
   margin: 1.5rem 0 0 0;
-  @media (max-width: 700px) {
+  @media (max-width: 899px) {
     text-align: center;
   }
 }
