@@ -2,19 +2,30 @@
 import { useState } from "react";
 import styles from "../login.module.scss";
 import Image from "next/image";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 export default function LoginIndex() {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailTouched, setEmailTouched] = useState(false);
+
+  const isValidEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const emailError = emailTouched && email.length > 0 && !isValidEmail(email);
+
+  const isFormValid = email && password && isValidEmail(email);
 
   const togglePassword = () => {
     setShowPassword((prev) => !prev);
   };
 
-   const router = useRouter();
+  const router = useRouter();
 
   const handleClick = () => {
-    router.push('/dashboard/users'); 
+    router.push("/dashboard/users");
   };
   return (
     <div className={styles.container}>
@@ -37,13 +48,26 @@ export default function LoginIndex() {
               <div className={styles.inputContainer}>
                 <input
                   type="text"
+                  className={`${styles.inputStyles} ${
+                    emailError ? styles.inputError : ""
+                  }`}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onBlur={() => setEmailTouched(true)}
                   placeholder="Email"
-                  className={styles.inputStyles}
                 />
+
+                {emailError && (
+                  <p className={styles.errorText}>
+                    Please provide a valid email address
+                  </p>
+                )}
 
                 <div className={styles.passwordWrapperStyles}>
                   <input
                     type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
                   />
 
@@ -59,7 +83,13 @@ export default function LoginIndex() {
                 <p className={styles.forgotPasswordText}>FORGOT PASSWORD?</p>
               </div>
 
-              <button className={styles.loginButton} onClick={handleClick}>LOG IN</button>
+              <button
+                className={styles.loginButton}
+                onClick={handleClick}
+                disabled={!isFormValid}
+              >
+                LOG IN
+              </button>
             </div>
           </div>
         </div>

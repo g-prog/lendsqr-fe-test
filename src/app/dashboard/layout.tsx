@@ -30,6 +30,7 @@ import PreferencesIcon from "@/components/icons/PreferencesIcon";
 import FeesAndPricing from "@/components/icons/FeesAndPricing";
 import AuditLogs from "@/components/icons/AuditLogs";
 
+
 export default function DashboardLayout({
   children,
 }: {
@@ -282,7 +283,7 @@ export default function DashboardLayout({
               })}
             </div>
 
-             <div className={layoutStyles.linksSection}>
+            <div className={layoutStyles.linksSection}>
               <p className={layoutStyles.sectionHeaderText}>SETTINGS</p>
 
               {dashboardItemsSettings.map((item) => {
