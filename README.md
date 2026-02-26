@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+A frontend implementation of the Lendsqr Admin Dashboard built with Next.js (App Router) and TypeScript.
 
-## Getting Started
+This project replicates core dashboard functionality including authentication routing, user listing, and dynamic user details pages.
 
-First, run the development server:
+ (A) TECH STACK
 
-```bash
+Next.js 16 (App Router)
+
+TypeScript
+
+SCSS Modules
+
+Jest + React Testing Library
+
+LocalStorage (mocked data source)
+
+(B) GETTING STARTTED
+
+1) Install dependencies:
+
+npm install
+
+2) Run development server:
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3) Open:  http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4) To build:  npm run build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+(C) PROJECT STRUCTURE
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Uses App Router (app/ directory)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Dynamic route for user details:
+/dashboard/users/[id]
 
-## Deploy on Vercel
+Root path / permanently redirects to /auth/login
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Shared layout defined in layout.tsx
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Global styles handled in globals.scss
+
+src/
+│
+├── app/
+│   ├── auth/
+│   │   └── login/
+│   ├── dashboard/
+│   │   └── users/
+│   │       ├── [id]/
+│   │       │   └── page.tsx
+│   │       └── page.tsx
+│   ├── layout.tsx
+│   └── globals.scss
+│
+├── components/
+│   └── icons/
+│
+├── __tests__/
+│
+└── utils/
+
+(D) ROUTING & REDIRECT
+
+async redirects() {
+  return [
+    {
+      source: '/',
+      destination: '/auth/login',
+      permanent: true,
+    },
+  ];
+}
+
+(E) USER DATA HANDLING
+
+User data is stored in localStorage
+
+The User Details page:
+
+Reads id from useParams()
+
+Fetches matching user from localStorage
+
+Displays "User not found" if no match exists
+
+
+(F) TESTING
+
+Testing is implemented using:
+
+Jest
+
+React Testing Library
+
+Tested behaviors include:
+
+Rendering user details
+
+Handling "User not found" state
+
+Router navigation (router.back())
+
+Component interaction
+
+To run tests 
+
+npm run test
+
+Global Loader was setup and can be found in
+
+app/loading.tsx
