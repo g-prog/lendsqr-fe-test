@@ -32,9 +32,9 @@ const UserDetailsPageIndex = () => {
     setUser(selectedUser);
   }, [id]);
 
-  if (!user) return <p>User not found</p>;
+  if (!user) return <p style={{ textAlign: "center", marginTop: "2rem"}}>User not found</p>;
 
-  if (!user) return <p style={{ textAlign: "center" }}>Loading...</p>;
+  if (!user) return <p style={{ textAlign: "center",  marginTop: "2rem" }}>Loading...</p>;
 
   const personalInfo = [
     { label: "Full Name", value: user.username },
